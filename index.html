@@ -1776,10 +1776,31 @@
     // IR previdência
     let irValor = 0, baseIR = 0, aliquota = 0, aliquotaLabel = '';
     if (regime === 'regressivo') {
-      aliquota = irRegressivo(prazo);
-      aliquotaLabel = (aliquota * 100).toFixed(0) + '% (regressivo, ' + prazo + ' anos)';
-      baseIR   = (tipo === 'pgbl') ? fv : rendimentos;
-      irValor  = baseIR * aliquota;
+      // Cálculo correto: cada aporte tem sua própria alíquota conforme sua idade no resgate.
+      // Ex.: num plano de 20 anos com aportes mensais, o 1º aporte completa 20 anos (10%) mas
+      // os últimos aportes têm apenas meses de vida e pagam 35%. A alíquota exibida é a efetiva ponderada.
+      const taxaMensal = Math.pow(1 + taxaLiquidaAnual, 1/12) - 1;
+      let irTotal = 0, fvTotal = 0;
+      // Aporte inicial: fica investido por n meses (= prazo anos)
+      if (inicialEfetivo > 0) {
+        const fvPV  = inicialEfetivo * Math.pow(1 + taxaMensal, n);
+        const rateI = irRegressivo(prazo);
+        irTotal += (tipo === 'pgbl') ? fvPV * rateI : (fvPV - inicialEfetivo) * rateI;
+        fvTotal += fvPV;
+      }
+      // Aportes mensais (anuidade postecipada): aporte m investido por (n-m) meses
+      for (let m = 1; m <= n; m++) {
+        const mg      = n - m;               // meses investidos
+        const ageAnos = mg / 12;             // idade em anos no resgate
+        const fvC     = aporteEfetivo * Math.pow(1 + taxaMensal, mg);
+        const rate    = irRegressivo(ageAnos);
+        irTotal += (tipo === 'pgbl') ? fvC * rate : (fvC - aporteEfetivo) * rate;
+        fvTotal += fvC;
+      }
+      irValor = irTotal;
+      const baseEfetiva = (tipo === 'pgbl') ? fvTotal : (fvTotal - totalEfetivo);
+      aliquota = baseEfetiva > 0 ? irTotal / baseEfetiva : 0;
+      aliquotaLabel = 'Regressiva ponderada — efetiva ' + fmtPct(aliquota) + (tipo === 'pgbl' ? ' s/ total' : ' s/ rend.');
     } else {
       baseIR  = (tipo === 'pgbl') ? fv : rendimentos;
       irValor = irProgressivo(baseIR);
@@ -1805,46 +1826,62 @@
     // Análise previdência
     let analysis = '';
     if (prazo >= 10 && regime === 'regressivo') {
-      analysis = `✅ Com ${prazo} anos no regime regressivo, você paga apenas ${(aliquota*100).toFixed(0)}% de IR — a menor alíquota da previdência. Saldo líquido estimado: ${fmtBRL(saldoLiquido)}, equivalente a uma renda mensal de ≈ ${fmtBRL(Math.max(0, rendaMensalLiquida))}.`;
+      analysis = `✅ Com ${prazo} anos no regime regressivo, a alíquota efetiva ponderada é ${fmtPct(aliquota)} — os aportes mais antigos pagam 10% e os mais recentes chegam a 35%, formando a média exibida. Saldo líquido estimado: ${fmtBRL(saldoLiquido)}, equivalente a uma renda mensal de ≈ ${fmtBRL(Math.max(0, rendaMensalLiquida))}.`;
     } else if (prazo < 6) {
-      analysis = `⚠️ Com apenas ${prazo} anos, a alíquota regressiva é ${(aliquota*100).toFixed(0)}% — bastante elevada. Para prazos curtos o Tesouro Direto (15% s/ rendimentos) pode ser mais vantajoso. Veja o comparativo abaixo.`;
+      analysis = `⚠️ Com apenas ${prazo} anos, a alíquota efetiva ponderada é ${fmtPct(aliquota)} — os aportes recentes ainda carregam alíquotas elevadas (até 35%). Para prazos curtos o Tesouro Direto (15% s/ rendimentos após 2 anos) pode ser mais vantajoso. Veja o comparativo abaixo.`;
     } else {
-      analysis = `📊 Em ${prazo} anos com aporte de ${fmtBRL(aporteMensal)}/mês, o patrimônio bruto projetado é ${fmtBRL(fv)}. Após IR (${(aliquota*100).toFixed(0)}%), o saldo líquido é ${fmtBRL(saldoLiquido)}.`;
+      analysis = `📊 Em ${prazo} anos com aporte de ${fmtBRL(aporteMensal)}/mês, o patrimônio bruto projetado é ${fmtBRL(fv)}. A alíquota efetiva ponderada de IR é ${fmtPct(aliquota)}, resultando em saldo líquido de ${fmtBRL(saldoLiquido)}.`;
     }
     if (tipo === 'pgbl' && economiaTotal > 0) {
       analysis += ` O benefício fiscal do PGBL pode adicionar ${fmtBRL(economiaTotal)} em restituições acumuladas.`;
     }
 
     // ── Tesouro Direto calculations ──
-    // IR Tesouro: 15% sobre rendimentos (prazo > 720 dias = > 2 anos; caso contrário usa tabela)
-    function irTesouroPct(anos) {
-      if (anos <= 0.5)  return 0.225;
-      if (anos <= 1)    return 0.20;
-      if (anos <= 2)    return 0.175;
-      return 0.15; // acima de 2 anos → 15%
+    // IR Tesouro Direto: tabela regressiva de renda fixa por meses de aplicação de cada aporte
+    function irTDmeses(meses) {
+      if (meses <= 6)  return 0.225;
+      if (meses <= 12) return 0.20;
+      if (meses <= 24) return 0.175;
+      return 0.15; // acima de 24 meses
     }
-    const irTdPct = irTesouroPct(prazo);
+    // Calcula FV, IR ponderado e líquido para Tesouro Direto com aporte inicial + aportes mensais
+    function calcTesouroPonderado(taxaAnualLiq, nMeses, pmt, pvVal) {
+      const rM = Math.pow(1 + taxaAnualLiq, 1/12) - 1;
+      let irAcc = 0, fvAcc = 0;
+      if (pvVal > 0) {
+        const fvP = pvVal * Math.pow(1 + rM, nMeses);
+        irAcc += (fvP - pvVal) * irTDmeses(nMeses);
+        fvAcc += fvP;
+      }
+      for (let m = 1; m <= nMeses; m++) {
+        const mg  = nMeses - m; // meses investidos para este aporte
+        const fvC = pmt * Math.pow(1 + rM, mg);
+        irAcc += (fvC - pmt) * irTDmeses(mg);
+        fvAcc += fvC;
+      }
+      return { fv: fvAcc, ir: irAcc, liq: fvAcc - irAcc };
+    }
 
     // Selic
-    const selicLiq = selicRate - custodiaB3;
-    const fvSelic  = calcFV(selicLiq, n, aporteMensal, aporteInicial);
-    const rendSelic = fvSelic - totalInvestido;
-    const irSelic   = rendSelic * irTdPct;
-    const liqSelic  = fvSelic - irSelic;
+    const selicLiq  = selicRate - custodiaB3;
+    const tdSelic   = calcTesouroPonderado(selicLiq, n, aporteMensal, aporteInicial);
+    const fvSelic   = tdSelic.fv;
+    const irSelic   = tdSelic.ir;
+    const liqSelic  = tdSelic.liq;
 
-    // IPCA+
-    const ipcaLiq  = ipcaNominal - custodiaB3;
-    const fvIPCA   = calcFV(ipcaLiq, n, aporteMensal, aporteInicial);
-    const rendIPCA = fvIPCA - totalInvestido;
-    const irIPCA   = rendIPCA * irTdPct;  // IR incide INCLUSIVE sobre correção inflacionária
-    const liqIPCA  = fvIPCA - irIPCA;
+    // IPCA+ (IR incide inclusive sobre a parcela de correção inflacionária)
+    const ipcaLiq   = ipcaNominal - custodiaB3;
+    const tdIPCA    = calcTesouroPonderado(ipcaLiq, n, aporteMensal, aporteInicial);
+    const fvIPCA    = tdIPCA.fv;
+    const irIPCA    = tdIPCA.ir;
+    const liqIPCA   = tdIPCA.liq;
 
     // Prefixado
-    const preLiq   = preRate - custodiaB3;
-    const fvPre    = calcFV(preLiq, n, aporteMensal, aporteInicial);
-    const rendPre  = fvPre - totalInvestido;
-    const irPre    = rendPre * irTdPct;
-    const liqPre   = fvPre - irPre;
+    const preLiq    = preRate - custodiaB3;
+    const tdPre     = calcTesouroPonderado(preLiq, n, aporteMensal, aporteInicial);
+    const fvPre     = tdPre.fv;
+    const irPre     = tdPre.ir;
+    const liqPre    = tdPre.liq;
 
     // ── Determina vencedor (saldo líquido + benefício fiscal) ──
     const scores = [
@@ -1880,7 +1917,7 @@
     document.getElementById('th-prev-sub').textContent = tipo.toUpperCase() + ' · ' + (regime === 'regressivo' ? 'Regressivo' : 'Progressivo');
     document.getElementById('c-prev-taxa').textContent  = fmtPct0(taxaAnual);
     document.getElementById('c-prev-custo').textContent = fmtPct0(adminAnual) + ' (adm.)' + (carga > 0 ? ' + ' + fmtPct0(carga) + ' (carg.)' : '');
-    document.getElementById('c-prev-ir-label').textContent = (aliquota*100).toFixed(0) + '%' + (tipo === 'pgbl' ? ' s/ total' : ' s/ rend.');
+    document.getElementById('c-prev-ir-label').textContent = fmtPct(aliquota) + (tipo === 'pgbl' ? ' s/ total' : ' s/ rend.');
     document.getElementById('c-prev-bruto').textContent = fmtBRL(fv);
     document.getElementById('c-prev-ir').textContent    = '− ' + fmtBRL(irValor);
     document.getElementById('c-prev-liq').textContent   = fmtBRL(saldoLiquido);
@@ -1923,7 +1960,7 @@
         compText += ` O benefício fiscal do PGBL (${fmtBRL(economiaTotal)} acumulados em restituições) é o principal fator de vantagem.`;
       }
       if (prazo >= 10 && regime === 'regressivo') {
-        compText += ` A alíquota regressiva de ${(aliquota*100).toFixed(0)}% (vs. 15% do Tesouro) também contribui significativamente.`;
+        compText += ` A alíquota efetiva ponderada de ${fmtPct(aliquota)} na previdência (vs. ≈15% ponderado do Tesouro) também contribui para a vantagem.`;
       }
     } else {
       compText = `📊 ${winnerNames[winner]} vence neste cenário. A Previdência ficou ${fmtBRL(Math.abs(diffPrevBest))} abaixo do melhor título público.`;
@@ -1952,37 +1989,4 @@
     const pgblInsight = document.getElementById('comp-insight-pgbl');
     const pgblText    = document.getElementById('comp-insight-pgbl-text');
     if (tipo === 'pgbl' && economiaTotal > 0) {
-      pgblText.innerHTML = `<strong>Vantagem exclusiva do PGBL:</strong> A economia de IR anual de ${fmtBRL(economiaAnual)} (${fmtPct0(aliquotaMargInv)} sobre ${fmtBRL(pgblDedutivel)}) não existe no Tesouro Direto. Se esse valor economizado for reinvestido anualmente no próprio plano ou em outro ativo, o ganho real pode ser ainda maior do que o ${fmtBRL(economiaTotal)} estimado (que considera apenas o benefício nominal, sem reinvestimento).`;
-      pgblInsight.style.display = 'flex';
-    } else {
-      pgblInsight.style.display = 'none';
-    }
-
-    // ── Preenche painel principal ──
-    document.getElementById('r-total-investido').textContent = fmtBRL(totalInvestido);
-    document.getElementById('r-saldo-bruto').textContent     = fmtBRL(fv);
-    document.getElementById('r-rendimentos').textContent     = fmtBRL(rendimentos);
-    document.getElementById('r-retorno-bruto').textContent   = fmtPct((fv / totalEfetivo) - 1);
-    document.getElementById('r-aliquota').textContent        = aliquotaLabel;
-    document.getElementById('r-base-ir').textContent         = fmtBRL(baseIR) + (tipo === 'pgbl' ? ' (valor total)' : ' (somente rendimentos)');
-    document.getElementById('r-ir').textContent              = '− ' + fmtBRL(irValor);
-    document.getElementById('r-iof').textContent             = 'R$ 0,00 (prazo > 60 dias)';
-    document.getElementById('r-liquido').textContent         = fmtBRL(saldoLiquido);
-    document.getElementById('r-limite-pgbl').textContent     = tipo === 'pgbl' ? fmtBRL(limitePGBL) + '/ano' : 'N/A (VGBL)';
-    document.getElementById('r-economia-ir').textContent     = tipo === 'pgbl' ? fmtBRL(economiaAnual) + '/ano' : 'N/A (VGBL)';
-    document.getElementById('r-economia-total').textContent  = tipo === 'pgbl' ? fmtBRL(economiaTotal) : 'N/A (VGBL)';
-    document.getElementById('r-renda-bruta').textContent     = fmtBRL(rendaMensalBruta);
-    document.getElementById('r-renda-liquida').textContent   = fmtBRL(Math.max(0, rendaMensalLiquida));
-    document.getElementById('r-analysis').textContent        = analysis;
-
-    document.getElementById('result-box').classList.add('visible');
-    document.getElementById('empty-state').style.display = 'none';
-
-    if (window.innerWidth < 768) {
-      document.getElementById('result-box').scrollIntoView({ behavior: 'smooth' });
-    }
-  }
-</script>
-
-</body>
-</html>
+      pgblText.innerHTML = `<strong>Vantagem exclusiva do PGBL:</strong> A economia de IR anual de ${fmtBRL(economiaAnual)} (${fmtPct0(aliquotaMargInv)} sobre ${fmtBRL(pgblDedutivel)}) não existe no Tesouro Direto. Se esse valor economizado for reinvestido an
