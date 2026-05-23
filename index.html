@@ -1,0 +1,1988 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guia Completo de Previdência Privada</title>
+  <style>
+    :root {
+      --navy: #0d2137;
+      --blue: #1a4a7a;
+      --blue-light: #2563a8;
+      --green: #1a7a4a;
+      --green-light: #27ae60;
+      --gold: #e6a817;
+      --gold-light: #f5c842;
+      --red: #c0392b;
+      --gray-bg: #f0f4f8;
+      --card-bg: #ffffff;
+      --text: #1a2a3a;
+      --text-muted: #5a6a7a;
+      --border: #d0dae6;
+      --shadow: 0 4px 20px rgba(13,33,55,0.10);
+      --shadow-hover: 0 8px 32px rgba(13,33,55,0.18);
+      --radius: 14px;
+      --radius-sm: 8px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--gray-bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--navy);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px;
+    }
+    .nav-logo {
+      color: var(--gold); font-weight: 800; font-size: 1.1rem;
+      padding: 16px 0; letter-spacing: -0.3px;
+      text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-logo span { font-size: 1.5rem; }
+    .nav-links {
+      display: flex; gap: 4px; list-style: none;
+      overflow-x: auto; padding: 8px 0;
+    }
+    .nav-links a {
+      color: #a8bfd4; font-size: 0.82rem; font-weight: 600;
+      text-decoration: none; padding: 6px 11px; border-radius: 6px;
+      transition: all .2s; white-space: nowrap; letter-spacing: 0.2px;
+    }
+    .nav-links a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 60%, #1a6a8a 100%);
+      color: #fff; text-align: center; padding: 80px 24px 90px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-block; background: rgba(230,168,23,0.2); color: var(--gold-light);
+      border: 1px solid rgba(230,168,23,0.4); border-radius: 50px;
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; padding: 6px 18px; margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900;
+      line-height: 1.15; margin-bottom: 18px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .hero h1 em { color: var(--gold-light); font-style: normal; }
+    .hero p {
+      font-size: 1.15rem; color: rgba(255,255,255,0.82); max-width: 680px;
+      margin: 0 auto 36px;
+    }
+    .hero-stats {
+      display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+      margin-top: 40px;
+    }
+    .hero-stat {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius); padding: 18px 28px; text-align: center;
+      backdrop-filter: blur(4px);
+    }
+    .hero-stat .val { font-size: 1.8rem; font-weight: 900; color: var(--gold-light); }
+    .hero-stat .lbl { font-size: 0.8rem; color: rgba(255,255,255,0.7); margin-top: 2px; }
+
+    /* ── SECTIONS ── */
+    section { padding: 72px 24px; }
+    section:nth-child(even) { background: #fff; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800;
+      color: var(--navy); margin-bottom: 10px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-title .icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; flex-shrink: 0;
+    }
+    .section-subtitle {
+      color: var(--text-muted); font-size: 1.05rem; margin-bottom: 40px;
+      max-width: 720px;
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--card-bg); border-radius: var(--radius);
+      box-shadow: var(--shadow); border: 1px solid var(--border);
+      padding: 28px; transition: box-shadow .25s;
+    }
+    .card:hover { box-shadow: var(--shadow-hover); }
+    .card-title {
+      font-size: 1.05rem; font-weight: 700; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+
+    /* ── COMPARISON TABLE ── */
+    .compare-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .compare-table th, .compare-table td {
+      padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+    }
+    .compare-table thead th {
+      background: var(--navy); color: #fff; font-weight: 700;
+      font-size: 0.9rem; letter-spacing: 0.3px;
+    }
+    .compare-table thead th:first-child { border-radius: 10px 0 0 0; }
+    .compare-table thead th:last-child { border-radius: 0 10px 0 0; }
+    .compare-table tbody tr:hover { background: #f0f6ff; }
+    .compare-table tbody tr:last-child td { border-bottom: none; }
+    .compare-table td:first-child { font-weight: 600; color: var(--navy); width: 30%; }
+    .yes { color: var(--green-light); font-weight: 700; }
+    .no { color: var(--red); font-weight: 700; }
+    .highlight-row { background: #fef9ec !important; }
+
+    /* ── TAX TABLE ── */
+    .tax-table { width: 100%; border-collapse: collapse; border-radius: var(--radius); overflow: hidden; }
+    .tax-table th {
+      background: var(--blue); color: #fff;
+      padding: 12px 16px; text-align: left; font-size: 0.88rem; font-weight: 700;
+    }
+    .tax-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 0.92rem; }
+    .tax-table tbody tr:nth-child(even) { background: #f5f9ff; }
+    .tax-table tbody tr:last-child td { border-bottom: none; }
+    .tax-table .rate { font-weight: 800; font-size: 1.05rem; }
+    .rate-0 { color: var(--green-light); }
+    .rate-low { color: #2196F3; }
+    .rate-mid { color: var(--gold); }
+    .rate-high { color: #FF5722; }
+    .rate-max { color: var(--red); }
+
+    /* ── PILL BADGES ── */
+    .badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 12px; border-radius: 50px;
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.3px;
+    }
+    .badge-green { background: #e8f5e9; color: var(--green); }
+    .badge-blue { background: #e3f0ff; color: var(--blue); }
+    .badge-gold { background: #fef9e7; color: #b7810a; }
+    .badge-red { background: #fdecea; color: var(--red); }
+    .badge-gray { background: #ecf0f4; color: #4a6070; }
+
+    /* ── FUND CARDS ── */
+    .fund-card {
+      background: #fff; border-radius: var(--radius);
+      border: 1px solid var(--border); box-shadow: var(--shadow);
+      padding: 22px; transition: all .25s; cursor: default;
+      position: relative; overflow: hidden;
+    }
+    .fund-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    }
+    .fund-card.conservative::before { background: var(--green); }
+    .fund-card.moderate::before { background: var(--blue-light); }
+    .fund-card.aggressive::before { background: var(--red); }
+    .fund-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+    .fund-name { font-weight: 800; font-size: 0.95rem; color: var(--navy); margin-bottom: 4px; }
+    .fund-manager { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px; }
+    .fund-stats { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 12px; }
+    .fund-stat { text-align: center; }
+    .fund-stat .v { font-size: 1.1rem; font-weight: 800; }
+    .fund-stat .l { font-size: 0.72rem; color: var(--text-muted); }
+    .fund-desc { font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; }
+    .fund-type-label {
+      font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+      padding: 2px 10px; border-radius: 50px; margin-bottom: 8px;
+      display: inline-block;
+    }
+    .conservative .fund-type-label { background: #e8f5e9; color: var(--green); }
+    .moderate .fund-type-label { background: #e3f0ff; color: var(--blue-light); }
+    .aggressive .fund-type-label { background: #fdecea; color: var(--red); }
+    .risk-bar { display: flex; gap: 4px; margin-top: 10px; align-items: center; }
+    .risk-bar span { font-size: 0.72rem; color: var(--text-muted); margin-right: 4px; }
+    .risk-dot {
+      width: 10px; height: 10px; border-radius: 50%; background: #d0dae6;
+    }
+    .risk-dot.active.low { background: var(--green); }
+    .risk-dot.active.mid { background: var(--gold); }
+    .risk-dot.active.high { background: var(--red); }
+
+    /* ── SIMULATOR ── */
+    #simulador { background: var(--navy); }
+    #simulador .section-title { color: #fff; }
+    #simulador .section-subtitle { color: rgba(255,255,255,0.65); }
+    .sim-card {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius); padding: 28px;
+      backdrop-filter: blur(8px);
+    }
+    .sim-card-label {
+      color: rgba(255,255,255,0.5); font-size: 0.8rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px;
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block; font-size: 0.88rem; font-weight: 600;
+      color: rgba(255,255,255,0.8); margin-bottom: 6px;
+    }
+    .form-group label .hint { font-weight: 400; color: rgba(255,255,255,0.45); font-size: 0.8rem; }
+    .form-control {
+      width: 100%; padding: 11px 14px;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
+      border-radius: var(--radius-sm); color: #fff; font-size: 0.95rem;
+      transition: border-color .2s, box-shadow .2s;
+      appearance: none;
+    }
+    .form-control:focus {
+      outline: none; border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(230,168,23,0.25);
+    }
+    .form-control option { background: var(--navy); color: #fff; }
+    .btn-sim {
+      width: 100%; padding: 14px;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      color: var(--navy); border: none; border-radius: var(--radius-sm);
+      font-size: 1rem; font-weight: 800; cursor: pointer; margin-top: 8px;
+      transition: all .2s; letter-spacing: 0.3px;
+    }
+    .btn-sim:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(230,168,23,0.4); }
+    .btn-sim:active { transform: translateY(0); }
+
+    /* ── RESULTS ── */
+    .result-box {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius); padding: 24px; margin-top: 16px;
+      display: none;
+    }
+    .result-box.visible { display: block; }
+    .result-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .result-row:last-child { border-bottom: none; }
+    .result-label { font-size: 0.88rem; color: rgba(255,255,255,0.65); }
+    .result-value { font-weight: 700; font-size: 1rem; color: #fff; }
+    .result-value.positive { color: var(--gold-light); }
+    .result-value.negative { color: #ff7675; }
+    .result-value.big { font-size: 1.4rem; }
+    .result-title {
+      font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+      color: rgba(255,255,255,0.4); margin-bottom: 14px;
+    }
+    .result-divider {
+      border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 16px 0;
+    }
+    .result-benefit {
+      background: rgba(39,174,96,0.15); border: 1px solid rgba(39,174,96,0.3);
+      border-radius: var(--radius-sm); padding: 12px 16px; margin-top: 16px;
+    }
+    .result-benefit-title { color: #55efc4; font-weight: 700; font-size: 0.88rem; margin-bottom: 4px; }
+    .result-benefit-text { color: rgba(255,255,255,0.7); font-size: 0.83rem; }
+
+    /* ── ALERT BOXES ── */
+    .alert {
+      padding: 16px 20px; border-radius: var(--radius-sm);
+      margin-top: 20px; display: flex; gap: 12px; align-items: flex-start;
+    }
+    .alert-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+    .alert-body { font-size: 0.9rem; }
+    .alert-body strong { display: block; font-size: 0.95rem; margin-bottom: 4px; }
+    .alert-gold { background: #fef9e7; border-left: 4px solid var(--gold); }
+    .alert-green { background: #e8f5e9; border-left: 4px solid var(--green-light); }
+    .alert-blue { background: #e3f0ff; border-left: 4px solid var(--blue-light); }
+    .alert-red { background: #fdecea; border-left: 4px solid var(--red); }
+
+    /* ── IOF TABLE ── */
+    .iof-table { width: 100%; border-collapse: collapse; }
+    .iof-table th { background: #8e44ad; color: #fff; padding: 10px 14px; font-size: 0.88rem; text-align: left; }
+    .iof-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .iof-table tbody tr:nth-child(even) { background: #fdf2ff; }
+    .iof-rate { font-weight: 800; }
+
+    /* ── OTHER FACTORS ── */
+    .factor-item {
+      display: flex; gap: 16px; padding: 20px;
+      background: #fff; border-radius: var(--radius);
+      border: 1px solid var(--border); box-shadow: var(--shadow);
+    }
+    .factor-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; flex-shrink: 0;
+    }
+    .factor-title { font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .factor-text { font-size: 0.9rem; color: var(--text-muted); line-height: 1.55; }
+
+    /* ── GLOSSARY ── */
+    .gloss-item { padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .gloss-item:last-child { border-bottom: none; }
+    .gloss-term { font-weight: 700; color: var(--navy); font-size: 0.95rem; }
+    .gloss-def { font-size: 0.9rem; color: var(--text-muted); margin-top: 2px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy); color: rgba(255,255,255,0.5);
+      text-align: center; padding: 32px 24px;
+      font-size: 0.85rem; line-height: 1.8;
+    }
+    footer strong { color: rgba(255,255,255,0.8); }
+    footer .disclaimer {
+      max-width: 800px; margin: 16px auto 0;
+      font-size: 0.78rem; color: rgba(255,255,255,0.35);
+      border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px;
+    }
+
+    /* ── TABS ── */
+    .tabs { display: flex; gap: 4px; margin-bottom: 28px; flex-wrap: wrap; }
+    .tab-btn {
+      padding: 9px 20px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: #fff;
+      font-size: 0.88rem; font-weight: 600; cursor: pointer;
+      color: var(--text-muted); transition: all .2s;
+    }
+    .tab-btn.active {
+      background: var(--navy); color: #fff; border-color: var(--navy);
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ── SECTION HEADERS ── */
+    .fund-section-header {
+      display: flex; align-items: center; gap: 12px; margin: 36px 0 20px;
+    }
+    .fund-section-header h3 { font-size: 1.15rem; font-weight: 800; }
+    .fund-section-header .line { flex: 1; height: 2px; border-radius: 2px; }
+    .conservative-line { background: linear-gradient(90deg, var(--green), transparent); }
+    .moderate-line { background: linear-gradient(90deg, var(--blue-light), transparent); }
+    .aggressive-line { background: linear-gradient(90deg, var(--red), transparent); }
+
+    /* ── TESOURO COMPARISON ── */
+    .tesouro-inputs-header {
+      display: flex; align-items: center; gap: 10px;
+      margin: 20px 0 16px; padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+    .tesouro-inputs-header .sim-card-label { margin: 0; }
+    .comp-table-wrap { overflow-x: auto; margin-top: 14px; border-radius: var(--radius-sm); }
+    .comp-table { width: 100%; border-collapse: collapse; min-width: 520px; }
+    .comp-table th {
+      background: rgba(255,255,255,0.10); color: rgba(255,255,255,0.75);
+      padding: 10px 13px; font-size: 0.78rem; font-weight: 700;
+      text-align: left; border-bottom: 1px solid rgba(255,255,255,0.12);
+      white-space: nowrap;
+    }
+    .comp-table th.center, .comp-table td.center { text-align: center; }
+    .comp-table td {
+      padding: 10px 13px; font-size: 0.87rem;
+      color: rgba(255,255,255,0.82);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      vertical-align: middle;
+    }
+    .comp-table tr:last-child td { border-bottom: none; }
+    .comp-table .row-label {
+      font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.5);
+      text-transform: uppercase; letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    .col-prev  { background: rgba(39,174,96,0.10); }
+    .col-selic { background: rgba(33,150,243,0.08); }
+    .col-ipca  { background: rgba(255,152,0,0.08); }
+    .col-pre   { background: rgba(156,39,176,0.08); }
+    .col-winner { background: rgba(230,168,23,0.18) !important; }
+    .comp-value { font-weight: 700; }
+    .comp-value.pos { color: #55efc4; }
+    .comp-value.neg { color: #ff7675; }
+    .comp-value.gold { color: var(--gold-light); font-size: 1.05rem; }
+    .winner-crown {
+      display: inline-flex; align-items: center; gap: 3px;
+      background: var(--gold); color: var(--navy);
+      font-size: 0.68rem; font-weight: 800;
+      padding: 2px 7px; border-radius: 50px; margin-left: 5px;
+      vertical-align: middle; white-space: nowrap;
+    }
+    .comp-header-pill {
+      display: block; font-size: 0.75rem; font-weight: 800;
+      padding: 4px 0 2px; border-radius: 4px 4px 0 0;
+      letter-spacing: 0.3px;
+    }
+    .pill-prev  { color: #55efc4; }
+    .pill-selic { color: #90caf9; }
+    .pill-ipca  { color: #ffcc80; }
+    .pill-pre   { color: #ce93d8; }
+    .comp-analysis {
+      background: rgba(255,255,255,0.05); border-radius: var(--radius-sm);
+      padding: 15px 18px; margin-top: 14px; font-size: 0.87rem;
+      color: rgba(255,255,255,0.75); line-height: 1.65;
+    }
+    .comp-analysis strong { color: var(--gold-light); }
+    .comp-insight {
+      display: flex; gap: 10px; align-items: flex-start;
+      background: rgba(255,255,255,0.04); border-radius: var(--radius-sm);
+      padding: 11px 14px; margin-top: 8px; font-size: 0.83rem;
+      color: rgba(255,255,255,0.65); line-height: 1.55;
+      border-left: 3px solid rgba(230,168,23,0.5);
+    }
+    .td-sub { font-size: 0.75rem; color: rgba(255,255,255,0.45); display: block; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width: 768px) {
+      .nav-links { display: none; }
+      .hero { padding: 56px 20px 64px; }
+      section { padding: 52px 16px; }
+      .hero-stats { gap: 16px; }
+      .hero-stat { padding: 14px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#top">
+      <span>📈</span> PrevidênciaGuia
+    </a>
+    <ul class="nav-links">
+      <li><a href="#pgbl-vgbl">PGBL x VGBL</a></li>
+      <li><a href="#incidencia-ir">IR</a></li>
+      <li><a href="#tributacao">Tributação</a></li>
+      <li><a href="#iof">IOF</a></li>
+      <li><a href="#fundos">Fundos</a></li>
+      <li><a href="#outros-fatores">Outros Fatores</a></li>
+      <li><a href="#simulador">Simulador</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="top" style="padding:0">
+  <div class="hero">
+    <div class="hero-badge">📘 Guia completo</div>
+    <h1>Tudo sobre<br><em>Previdência Privada</em></h1>
+    <p>Entenda PGBL e VGBL, as regras de tributação, os principais fundos do mercado e simule quanto seu dinheiro pode render ao longo do tempo.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="val">R$ 1,3 tri</div>
+        <div class="lbl">Patrimônio do setor (2024)</div>
+      </div>
+      <div class="hero-stat">
+        <div class="val">16 mi</div>
+        <div class="lbl">Participantes no Brasil</div>
+      </div>
+      <div class="hero-stat">
+        <div class="val">10%</div>
+        <div class="lbl">IR mínimo (regressivo)</div>
+      </div>
+      <div class="hero-stat">
+        <div class="val">12%</div>
+        <div class="lbl">Dedução máxima no PGBL</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 1. PGBL x VGBL ── -->
+<section id="pgbl-vgbl">
+  <div class="section-inner">
+    <h2 class="section-title">
+      <span class="icon" style="background:#e3f0ff;">⚖️</span>
+      PGBL vs. VGBL: Qual a diferença?
+    </h2>
+    <p class="section-subtitle">São os dois principais tipos de previdência privada aberta do Brasil. A escolha certa depende do seu perfil fiscal e da forma como você faz a declaração do IR.</p>
+
+    <div style="overflow-x:auto; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border);">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Característica</th>
+            <th>PGBL</th>
+            <th>VGBL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Nome completo</td>
+            <td>Plano Gerador de Benefício Livre</td>
+            <td>Vida Gerador de Benefício Livre</td>
+          </tr>
+          <tr>
+            <td>Classificação legal</td>
+            <td>Plano de previdência complementar</td>
+            <td>Seguro de pessoas (VGBL é um seguro)</td>
+          </tr>
+          <tr class="highlight-row">
+            <td>🎯 Dedução no IR anual</td>
+            <td><span class="yes">✔ Sim</span> — até 12% da renda bruta tributável</td>
+            <td><span class="no">✗ Não</span> — aportes sem dedução</td>
+          </tr>
+          <tr>
+            <td>Quem pode deduzir</td>
+            <td>Apenas quem faz declaração completa (modelo completo)</td>
+            <td>Não se aplica</td>
+          </tr>
+          <tr class="highlight-row">
+            <td>🏦 Base de incidência do IR no resgate</td>
+            <td><strong>Valor total</strong> (principal + rendimentos)</td>
+            <td><strong>Apenas os rendimentos</strong> (ganho de capital)</td>
+          </tr>
+          <tr>
+            <td>Lógica tributária</td>
+            <td>Adia o imposto (deduz agora, paga depois)</td>
+            <td>Paga antecipado (contribui com dinheiro já tributado)</td>
+          </tr>
+          <tr>
+            <td>Indicado para quem</td>
+            <td>Declara IR completo e tem alta alíquota marginal</td>
+            <td>Declara IR simplificado, isento, ou quer menor carga no resgate</td>
+          </tr>
+          <tr>
+            <td>Regulação</td>
+            <td>PREVIC (Superintendência Nacional de Previdência)</td>
+            <td>SUSEP (Superintendência de Seguros Privados)</td>
+          </tr>
+          <tr>
+            <td>Regime de tributação aplicável</td>
+            <td>Progressivo ou Regressivo</td>
+            <td>Progressivo ou Regressivo</td>
+          </tr>
+          <tr>
+            <td>Portabilidade</td>
+            <td><span class="yes">✔ Sim</span></td>
+            <td><span class="yes">✔ Sim</span></td>
+          </tr>
+          <tr>
+            <td>Inventário / Herança</td>
+            <td>Não entra em inventário*</td>
+            <td>Não entra em inventário*</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size:0.8rem; color: var(--text-muted); margin-top:10px">*Em regra, a previdência privada não integra o espólio para fins de inventário, mas alguns estados passaram a cobrar ITCMD. Consulte um especialista na sua UF.</p>
+
+    <div class="grid-2" style="margin-top:28px">
+      <div class="alert alert-gold">
+        <div class="alert-icon">💡</div>
+        <div class="alert-body">
+          <strong>Quando o PGBL compensa?</strong>
+          Se você está na faixa de 27,5% do IR e investe R$ 10.000/ano no PGBL, pode restituir até R$ 2.750 na declaração. Esse ganho imediato pode superar o custo de pagar IR sobre o total no resgate, especialmente com o regime regressivo de longo prazo.
+        </div>
+      </div>
+      <div class="alert alert-green">
+        <div class="alert-icon">💡</div>
+        <div class="alert-body">
+          <strong>Quando o VGBL compensa?</strong>
+          Se você é isento, declara no modelo simplificado, ou já usou o limite de 12% no PGBL, o VGBL é a melhor opção — o IR incide apenas sobre os rendimentos, o que reduz bastante a carga tributária no resgate.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 2. INCIDÊNCIA DO IR ── -->
+<section id="incidencia-ir" style="background:#fff">
+  <div class="section-inner">
+    <h2 class="section-title">
+      <span class="icon" style="background:#fef9e7;">💰</span>
+      Como o IR incide em cada modalidade
+    </h2>
+    <p class="section-subtitle">A diferença na base de cálculo do IR é o ponto mais importante para entender qual plano é mais vantajoso para o seu caso.</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title" style="color: var(--blue);">🏦 PGBL — IR sobre o valor total</div>
+        <p style="font-size:0.93rem; color: var(--text-muted); margin-bottom: 16px;">Como os aportes foram deduzidos da base de cálculo do IR na fase de acumulação, no resgate o fisco cobra imposto sobre <strong>tudo</strong>: o principal investido + os rendimentos.</p>
+        <div style="background: #f0f6ff; border-radius: var(--radius-sm); padding: 16px; font-size:0.9rem;">
+          <strong>Exemplo:</strong><br>
+          Você investiu R$ 100.000 ao longo dos anos e o saldo cresceu para R$ 300.000.<br><br>
+          IR incide sobre: <strong style="color:var(--blue)">R$ 300.000 (valor total)</strong>
+        </div>
+        <div style="margin-top:14px; font-size:0.85rem; color:var(--text-muted);">
+          A lógica é justa: você não pagou IR nesse dinheiro quando investiu (deduziu), então paga tudo no final.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color: var(--green);">📊 VGBL — IR apenas sobre os rendimentos</div>
+        <p style="font-size:0.93rem; color: var(--text-muted); margin-bottom: 16px;">Como os aportes <em>não</em> foram deduzidos do IR (você já pagou o imposto sobre esse dinheiro), no resgate o IR incide apenas sobre o <strong>ganho</strong> — a diferença entre o que você investiu e o que resgata.</p>
+        <div style="background: #e8f5e9; border-radius: var(--radius-sm); padding: 16px; font-size:0.9rem;">
+          <strong>Exemplo:</strong><br>
+          Você investiu R$ 100.000 e o saldo cresceu para R$ 300.000.<br><br>
+          IR incide sobre: <strong style="color:var(--green)">R$ 200.000 (somente rendimentos)</strong>
+        </div>
+        <div style="margin-top:14px; font-size:0.85rem; color:var(--text-muted);">
+          Isso representa uma economia tributária significativa em relação ao PGBL para quem não tem benefício da dedução.
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-blue" style="margin-top:24px">
+      <div class="alert-icon">ℹ️</div>
+      <div class="alert-body">
+        <strong>Fase de Acumulação x Fase de Benefício</strong>
+        A previdência privada tem duas fases. Na <strong>fase de acumulação</strong>, você contribui mensalmente ou esporadicamente e o saldo cresce (investimento). Na <strong>fase de benefício</strong>, você passa a receber uma renda — que pode ser vitalícia, por prazo certo, ou de outras formas. O IR incide tanto no resgate total quanto no recebimento da renda.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 3. TRIBUTAÇÃO ── -->
+<section id="tributacao">
+  <div class="section-inner">
+    <h2 class="section-title">
+      <span class="icon" style="background:#fdecea;">📋</span>
+      Regimes de Tributação do IR
+    </h2>
+    <p class="section-subtitle">Ao contratar o plano, você escolhe o regime de tributação — e essa escolha é <strong>irrevogável</strong>. Existem duas opções: progressiva e regressiva. A escolha certa pode representar economia de dezenas de milhares de reais.</p>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('progressiva')">Tabela Progressiva</button>
+      <button class="tab-btn" onclick="switchTab('regressiva')">Tabela Regressiva</button>
+      <button class="tab-btn" onclick="switchTab('comparativo')">Comparativo</button>
+    </div>
+
+    <div id="tab-progressiva" class="tab-content active">
+      <div class="card" style="margin-bottom:24px">
+        <div class="card-title">📈 Tributação Progressiva (Compensável)</div>
+        <p style="font-size:0.93rem; color:var(--text-muted); margin-bottom:20px;">Segue a mesma tabela do IR sobre salários. Quanto maior o valor recebido/resgatado, maior a alíquota. No resgate/recebimento, há retenção na fonte de 15% (antecipação), e o valor é ajustado na Declaração Anual com base na renda total do contribuinte.</p>
+
+        <div style="font-weight:700; color:var(--navy); margin-bottom:12px">Tabela Progressiva Mensal (2024/2025)</div>
+        <div style="overflow-x:auto">
+          <table class="tax-table">
+            <thead>
+              <tr><th>Base de Cálculo Mensal</th><th>Alíquota</th><th>Parcela a Deduzir</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Até R$ 2.259,20</td><td class="rate rate-0">Isento (0%)</td><td>—</td></tr>
+              <tr><td>De R$ 2.259,21 a R$ 2.826,65</td><td class="rate rate-low">7,5%</td><td>R$ 169,44</td></tr>
+              <tr><td>De R$ 2.826,66 a R$ 3.751,05</td><td class="rate rate-mid">15%</td><td>R$ 381,44</td></tr>
+              <tr><td>De R$ 3.751,06 a R$ 4.664,68</td><td class="rate rate-high">22,5%</td><td>R$ 662,77</td></tr>
+              <tr><td>Acima de R$ 4.664,68</td><td class="rate rate-max">27,5%</td><td>R$ 896,00</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="font-weight:700; color:var(--navy); margin:20px 0 12px">Tabela Progressiva Anual (2024/2025)</div>
+        <div style="overflow-x:auto">
+          <table class="tax-table">
+            <thead>
+              <tr><th>Base de Cálculo Anual</th><th>Alíquota</th><th>Parcela a Deduzir</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Até R$ 27.110,40</td><td class="rate rate-0">Isento (0%)</td><td>—</td></tr>
+              <tr><td>De R$ 27.110,41 a R$ 33.919,80</td><td class="rate rate-low">7,5%</td><td>R$ 2.033,28</td></tr>
+              <tr><td>De R$ 33.919,81 a R$ 45.012,60</td><td class="rate rate-mid">15%</td><td>R$ 4.576,08</td></tr>
+              <tr><td>De R$ 45.012,61 a R$ 55.976,16</td><td class="rate rate-high">22,5%</td><td>R$ 7.953,22</td></tr>
+              <tr><td>Acima de R$ 55.976,16</td><td class="rate rate-max">27,5%</td><td>R$ 10.752,05</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="alert alert-gold" style="margin-top:20px">
+          <div class="alert-icon">⚡</div>
+          <div class="alert-body">
+            <strong>Atenção: Antecipação de 15%</strong>
+            No regime progressivo, há sempre uma retenção de 15% na fonte no ato do resgate. Ao fazer a declaração anual, o valor é reajustado: se sua alíquota efetiva for menor, há restituição; se for maior, há complementação.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-regressiva" class="tab-content">
+      <div class="card">
+        <div class="card-title">📉 Tributação Regressiva (Exclusiva na Fonte)</div>
+        <p style="font-size:0.93rem; color:var(--text-muted); margin-bottom:20px;">No regime regressivo, a alíquota do IR diminui conforme o tempo de permanência de cada aporte no plano. Começa em 35% nos primeiros 2 anos e chega a apenas 10% para valores acumulados há mais de 10 anos. O imposto é <strong>definitivo</strong> — não entra na declaração anual para ajuste.</p>
+
+        <div style="overflow-x:auto">
+          <table class="tax-table">
+            <thead>
+              <tr><th>Prazo de Acumulação do Aporte</th><th>Alíquota de IR</th><th>Observação</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Até 2 anos</td><td class="rate rate-max">35%</td><td>Alíquota máxima — não recomendável resgatar</td></tr>
+              <tr><td>De 2 a 4 anos</td><td class="rate rate-high">30%</td><td>Ainda muito elevada</td></tr>
+              <tr><td>De 4 a 6 anos</td><td class="rate rate-high">25%</td><td>Pode equiparar-se ao progressivo</td></tr>
+              <tr><td>De 6 a 8 anos</td><td class="rate rate-mid">20%</td><td>Começam as vantagens</td></tr>
+              <tr><td>De 8 a 10 anos</td><td class="rate rate-low">15%</td><td>Vantajoso para altas rendas</td></tr>
+              <tr><td>Acima de 10 anos</td><td class="rate rate-0">10%</td><td>✅ Alíquota mínima — muito atrativo</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="alert alert-blue" style="margin-top:20px">
+          <div class="alert-icon">📌</div>
+          <div class="alert-body">
+            <strong>Prazo contado por aporte</strong>
+            O prazo é calculado individualmente para cada aporte feito. Se você investiu por 12 anos mas fez o último aporte há 1 ano, os primeiros aportes serão tributados a 10% e o último a 35%. Por isso, o regime regressivo é mais eficiente para quem faz aportes regulares por longos períodos.
+          </div>
+        </div>
+
+        <div class="alert alert-green" style="margin-top:12px">
+          <div class="alert-icon">✅</div>
+          <div class="alert-body">
+            <strong>Regime regressivo = planejamento de longo prazo</strong>
+            Quem mantém recursos por mais de 10 anos paga apenas 10% de IR — menos do que qualquer outra aplicação financeira convencional (que paga 15% na tabela regressiva do IR padrão para renda fixa). Isso torna a previdência regressiva uma das melhores opções para planejamento de aposentadoria.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-comparativo" class="tab-content">
+      <div class="card">
+        <div class="card-title">⚖️ Progressivo vs. Regressivo — Quando Cada Um Compensa?</div>
+        <p style="font-size:0.93rem; color:var(--text-muted); margin-bottom:20px;">A escolha ideal depende do prazo de investimento, da sua faixa de IR e do valor que pretende resgatar mensalmente.</p>
+        <div style="overflow-x:auto">
+          <table class="tax-table">
+            <thead>
+              <tr><th>Situação</th><th>Progressivo</th><th>Regressivo</th><th>Recomendação</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Prazo de acumulação</td>
+                <td>Qualquer prazo</td>
+                <td>Ideal acima de 10 anos</td>
+                <td><span class="badge badge-blue">Regressivo p/ longo prazo</span></td>
+              </tr>
+              <tr>
+                <td>Renda de aposentadoria baixa (até R$ 2.259/mês)</td>
+                <td class="yes">✔ Isento de IR</td>
+                <td class="no">Paga 10% mínimo</td>
+                <td><span class="badge badge-green">Progressivo</span></td>
+              </tr>
+              <tr>
+                <td>Alta renda no resgate (acima de R$ 4.665/mês)</td>
+                <td class="no">✗ Paga 27,5%</td>
+                <td class="yes">✔ Paga 10% (após 10 anos)</td>
+                <td><span class="badge badge-blue">Regressivo</span></td>
+              </tr>
+              <tr>
+                <td>Incerteza sobre valor do resgate</td>
+                <td>Mais flexível</td>
+                <td>Alíquota fixa por prazo</td>
+                <td><span class="badge badge-gold">Progressivo</span></td>
+              </tr>
+              <tr>
+                <td>Objetivo: aposentadoria de 20+ anos</td>
+                <td>Sujeito à tabela vigente</td>
+                <td>Trava alíquota em 10%</td>
+                <td><span class="badge badge-blue">Regressivo</span></td>
+              </tr>
+              <tr>
+                <td>Herança / transmissão de riqueza</td>
+                <td>Pode gerar ITCMD</td>
+                <td>Pode gerar ITCMD</td>
+                <td><span class="badge badge-gray">Verificar UF</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="alert alert-red" style="margin-top:20px">
+          <div class="alert-icon">⚠️</div>
+          <div class="alert-body">
+            <strong>Decisão irreversível!</strong>
+            O regime de tributação é escolhido na assinatura do contrato e não pode ser alterado depois. Pense bem antes de decidir. A migração de um plano para outro (portabilidade) não altera o regime já escolhido.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 4. IOF ── -->
+<section id="iof" style="background:#fff">
+  <div class="section-inner">
+    <h2 class="section-title">
+      <span class="icon" style="background:#f3e5f5;">🔷</span>
+      IOF — Imposto sobre Operações Financeiras
+    </h2>
+    <p class="section-subtitle">O IOF é cobrado apenas em resgates realizados nos primeiros 60 dias após cada aporte. Após esse período, a alíquota é zero.</p>
+
+    <div class="grid-2">
+      <div>
+        <div class="card" style="margin-bottom:20px">
+          <div class="card-title">Como funciona o IOF na previdência?</div>
+          <ul style="font-size:0.92rem; color:var(--text-muted); line-height:2; padding-left:20px">
+            <li>Incide somente sobre resgates nos <strong>primeiros 60 dias</strong> após o aporte</li>
+            <li>A alíquota cai diariamente, atingindo <strong>0% no 61° dia</strong></li>
+            <li>No <strong>PGBL</strong>: incide sobre o valor total resgatado</li>
+            <li>No <strong>VGBL</strong>: incide sobre os rendimentos proporcionais</li>
+            <li>É cobrado <strong>antes do IR</strong> — reduz a base de cálculo do imposto</li>
+            <li>Na prática, resgates após 60 dias não têm IOF</li>
+          </ul>
+        </div>
+
+        <div class="alert alert-red">
+          <div class="alert-icon">🚨</div>
+          <div class="alert-body">
+            <strong>Evite resgates precipitados!</strong>
+            Um resgate no 1° dia pode gerar IOF de 96% sobre os rendimentos, além do IR de 35% (regressivo). Isso significa que um resgate muito precoce pode resultar em prejuízo líquido. Planeje sempre com antecedência.
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="overflow-x:auto; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border);">
+          <table class="iof-table">
+            <thead>
+              <tr><th>Dia do Resgate</th><th>Alíquota IOF</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1° dia</td><td class="iof-rate" style="color:#c0392b">96%</td></tr>
+              <tr><td>5° dia</td><td class="iof-rate" style="color:#e67e22">80%</td></tr>
+              <tr><td>10° dia</td><td class="iof-rate" style="color:#f39c12">66%</td></tr>
+              <tr><td>15° dia</td><td class="iof-rate" style="color:#f1c40f">50%</td></tr>
+              <tr><td>20° dia</td><td class="iof-rate" style="color:#e8d44d">40%</td></tr>
+              <tr><td>25° dia</td><td class="iof-rate" style="color:#c8d444">30%</td></tr>
+              <tr><td>30° dia</td><td class="iof-rate" style="color:#8ecc44">20%</td></tr>
+              <tr><td>40° dia</td><td class="iof-rate" style="color:#4CAF50">13%</td></tr>
+              <tr><td>50° dia</td><td class="iof-rate" style="color:#2e7d32">3%</td></tr>
+              <tr><td>60° dia</td><td class="iof-rate" style="color:#1b5e20">0%</td></tr>
+              <tr><td><strong>61° dia em diante</strong></td><td class="iof-rate" style="color:#1b5e20"><strong>✅ 0%</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:0.78rem; color:var(--text-muted); margin-top:8px">Fonte: Tabela Anexa do Decreto nº 6.306/2007 e atualizações. Alíquotas decrescentes — valores intermediários são proporcionais.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 5. FUNDOS ── -->
+<section id="fundos">
+  <div class="section-inner">
+    <h2 class="section-title">
+      <span class="icon" style="background:#e8f5e9;">🏛️</span>
+      Fundos de Previdência Privada
+    </h2>
+    <p class="section-subtitle">Os planos PGBL e VGBL são apenas a "casca" do produto. O dinheiro é alocado em fundos de investimento específicos para previdência (FIEs — Fundos de Investimento Especialmente Constituídos). A escolha do fundo determina o risco e o retorno potencial.</p>
+
+    <div class="grid-3" style="margin-bottom:32px">
+      <div class="card">
+        <div style="font-size:2rem; margin-bottom:8px">🟢</div>
+        <div class="card-title" style="color:var(--green)">Fundos Conservadores</div>
+        <p style="font-size:0.9rem; color:var(--text-muted)">Investem principalmente em títulos públicos (Tesouro Direto), CDBs e outros ativos de renda fixa de baixo risco. Rentabilidade próxima ao CDI/Selic. Ideais para quem está próximo da aposentadoria ou tem baixa tolerância ao risco.</p>
+      </div>
+      <div class="card">
+        <div style="font-size:2rem; margin-bottom:8px">🔵</div>
+        <div class="card-title" style="color:var(--blue-light)">Fundos Moderados</div>
+        <p style="font-size:0.9rem; color:var(--text-muted)">Combinam renda fixa com uma parcela menor em renda variável (ações, FIIs, câmbio). Buscam retorno superior ao CDI com risco controlado. Indicados para horizontes de médio a longo prazo.</p>
+      </div>
+      <div class="card">
+        <div style="font-size:2rem; margin-bottom:8px">🔴</div>
+        <div class="card-title" style="color:var(--red)">Fundos Arrojados</div>
+        <p style="font-size:0.9rem; color:var(--text-muted)">Alta concentração em renda variável (ações nacionais e internacionais). Potencial de retorno significativamente maior, mas com forte volatilidade. Recomendado para horizontes de 10+ anos e alta tolerância ao risco.</p>
+      </div>
+    </div>
+
+    <!-- CONSERVATIVE -->
+    <div class="fund-section-header">
+      <h3 style="color:var(--green)">🟢 Fundos Conservadores</h3>
+      <div class="line conservative-line"></div>
+    </div>
+    <div class="grid-4">
+      <div class="fund-card conservative">
+        <div class="fund-type-label">Conservador</div>
+        <div class="fund-name">Brasilprev RT Fix Curto Prazo</div>
+        <div class="fund-manager">📌 Brasilprev (Grupo BB)</div>
+        <div class="fund-stats">
+          <div class="fund-stat">
+            <div class="v" style="color:var(--green)">~CDI</div>
+            <div class="l">Rentabilidade alvo</div>
+          </div>
+          <div class="fund-stat">
+            <div class="v" style="color:var(--text-muted)">Baixo</div>
+            <div class="l">Risco</div>
+          </div>
+        </div>
+        <div class="fund-desc">Investe majoritariamente em LFTs (Tesouro Selic) e operações compromissadas. Liquidez elevada, ideal para recursos de curto prazo. Um dos maiores fundos de previdência do Brasil em patrimônio.</div>
+        <div class="risk-bar">
+          <span>Risco:</span>
+          <div class="risk-dot active low"></div>
+          <div class="risk-dot"></div>
+          <div class="risk-dot"></div>
+          <div class="risk-dot"></div>
+          <div class="risk-dot"></div>
+        </div>
+      </div>
+
+      <div class="fund-card conservative">
+        <div class="fund-type-label">Conservador</div>
+        <div class="fund-name">Itaú Flexprev RF Diferenciado</div>
+        <div class="fund-manager">📌 Itaú Unibanco</div>
+        <div class="fund-stats">
+          <div class="fund-stat">
+            <div class="v" style="color:var(--green)">CDI+</div>
+            <div class="l">Rentabilidade alvo</div>
+          </div>
+          <div class="fund-stat">
+            <div class="v" style="color:var(--text-muted)">Baixo</div>
+            <div class="l">Risco</div>
+          </div>
+        </div>
+        <div class="fund-desc">Carteira com NTN-Bs, LFTs e crédito privado de alta qualidade (AAA). Gestão ativa da duration para maximizar retorno dentro do perfil conservador. Recomendado para preservação de capital.</div>
+        <div class="risk-bar">
+          <span>Risco:</span>
+          <div class="risk-dot active low"></div>
+          <div class="risk-dot active low"></div>
+          <div class="risk-dot"></div>
+          <div class="risk-dot"></div>
+          <div class="risk-dot"></div>
+        </div>
+      </div>
+
+      <div class="fund-card conservative">
+        <div class="fund-type-label">Conservador</div>
+        <div class="fund-name">Bradesco Prev RF Soberano</div>
+        <div class="fund-manager">📌 Bradesco Seguros</div>
+        <div class="fund-stats">
+          <div class="fund-stat">
+            <div class="v" style="color:var(--green)">Selic</div>
+            <div class="l">Rentabilidade alvo</div>
+          </div>
+          <div class="fund-stat">
+            <div class="v" style="color:var(--text-muted)">Muito Baixo</div>
+            <div class="l">Risco</div>
+          </div>
+        </div>
+        <div class="fund-desc">Exclusivamente em títulos do Tesouro Nacional. Zero exposição a crédito privado. Perfeito para o perfil ultraconservador — foco em segurança acima de tudo. Adequado para aposentados ou próximos à aposentadoria.</div>
+        <div class="risk-bar">
+          <span>Risco:</span>
+          <div class="risk-dot active low"></div>
+          <div class="risk-dot"></div>
+          <div class="risk-dot"></div>
+          <div class="risk-dot"></div>
+          <div class="risk-dot"></div>
+        </div>
+      </div>
+
+      <div class="fund-card conservative">
+        <div class="fund-type-label">Conservador</div>
+        <div class="fund-name">Caixa FIC Previdenciário RF Plus</div>
+        <div class="fund-manager">📌 Caixa Econômica Federal</div>
+        <div class="fund-stats">
+          <div class="fund-stat">
+            <div class="v" style="color:var(--green)">CDI</div>
+            <div class="l">Rentabilidade alvo</div>
+          </div>
+          <div class="fund-stat">
+            <div class="v" style="color:var(--text-muted)">Baixo</div>
+            <div class="l">Risco</div>
+          </div>
+        </div>
+        <div class="fund-desc">Fundo de renda fixa referenciado ao CDI, administrado pela Caixa. Investe em títulos públicos e ativos de renda fixa de alta qualidade. Ampla rede de distribuição e taxa de administração competitiva.</div>
+        <div class="risk-bar">
+          <span>Risco:</span>
+          <div class="risk-dot active low"></div>
+          <div class="risk-dot active low"></div>
+          <div class="risk-dot"></div>
+          <div class="risk-dot"></div>
+          <div class="risk-dot"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODERATE -->
+    <div class="fund-section-header">
+      <h3 style="color:var(--blue-light)">🔵 Fundos Moderados (Balanceados)</h3>
+      <div class="line moderate-line"></div>
+    </div>
+    <div class="grid-4">
+      <div class="fund-card moderate">
+        <div class="fund-type-label">Moderado</div>
+        <div class="fund-name">XP Prev Multimercado Moderado</div>
+        <div class="fund-manager">📌 XP Investimentos</div>
+        <div class="fund-stats">
+          <div class="fund-stat">
+            <div class="v" style="color:var(--blue-light)">CDI+2%</div>
+            <div class="l">Rentabilidade alvo</div>
+          </div>
+          <div class="fund-stat">
+            <div class="v" style="color:#f39c12">Médio</div>
+            <div class="l">Risco</div>
+          </div>
+        </div>
+        <div class="fund-desc">Estratégia multimercado com alocação dinâmica: ~70% renda fixa (NTN-B, crédito privado) e ~30% em renda variável (ações, câmbio, juros). Gestão ativa e diversificada pela XP Asset.</div>
+        <div class="risk-bar">
+          <span>Risco:</span>
+          <div class="risk-dot active mid"></div>
+          <div class="risk-dot active mid"></div>
+          <div class="risk-dot active mid"></div>
+          <div class="risk-dot"></div>
+          <div class="risk-dot"></div>
+        </div>
+      </div>
+
+      <div class="fund-card moderate">
+        <div class="fund-type-label">Moderado</div>
+        <div class="fund-name">Santander Prev Multiestratégia</div>
+        <div class="fund-manager">📌 Santander Brasil</div>
+        <div class="fund-stats">
+          <div class="fund-stat">
+            <div class="v" style="color:var(--blue-light)">CDI+1,5%</div>
+            <div class="l">Rentabilidade alvo</div>
+          </div>
+          <div class="fund-stat">
+            <div class="v" style="color:#f39c12">Médio</div>
+            <div class="l">Risco</div>
+          </div>
+        </div>
+        <div class="fund-desc">Combina renda fixa pós e pré-fixada com exposição moderada a ações e fundos imobiliários. A gestão busca oportunidades no mercado nacional sem abandonar a proteção de capital em ativos mais seguros.</div>
+        <div class="risk-bar">
+          <span>Risco:</span>
+          <div class="risk-dot active mid"></div>
+          <div class="risk-dot active mid"></div>
+          <div class="risk-dot active mid"></div>
+          <div class="risk-dot"></div>
+          <div class="risk-dot"></div>
+        </div>
+      </div>
+
+      <div class="fund-card moderate">
+        <div class="fund-type-label">Moderado</div>
+        <div class="fund-name">Itaú Prev Balanceado 15</div>
+        <div class="fund-manager">📌 Itaú Asset Management</div>
+        <div class="fund-stats">
+          <div class="fund-stat">
+            <div class="v" style="color:var(--blue-light)">IPCA+4%</div>
+            <div class="l">Rentabilidade alvo</div>
+          </div>
+          <div class="fund-stat">
+            <div class="v" style="color:#f39c12">Médio</div>
+            <div class="l">Risco</div>
+          </div>
+        </div>
+        <div class="fund-desc">Alocação estrutural com 85% em renda fixa (NTN-B de longo prazo) e 15% em ações. A exposição acionária é gerida ativamente, com rebalanceamento periódico. Foco no crescimento real acima da inflação.</div>
+        <div class="risk-bar">
+          <span>Risco:</span>
+          <div class="risk-dot active mid"></div>
+          <div class="risk-dot active mid"></div>
+          <div class="risk-dot active mid"></div>
+          <div class="risk-dot"></div>
+          <div class="risk-dot"></div>
+        </div>
+      </div>
+
+      <div class="fund-card moderate">
+        <div class="fund-type-label">Moderado</div>
+        <div class="fund-name">BB Prev Multimercado Moderado</div>
+        <div class="fund-manager">📌 BB DTVM (Banco do Brasil)</div>
+        <div class="fund-stats">
+          <div class="fund-stat">
+            <div class="v" style="color:var(--blue-light)">CDI+2%</div>
+            <div class="l">Rentabilidade alvo</div>
+          </div>
+          <div class="fund-stat">
+            <div class="v" style="color:#f39c12">Médio</div>
+            <div class="l">Risco</div>
+          </div>
+        </div>
+        <div class="fund-desc">Mix de 70% renda fixa e 30% renda variável, com possibilidade de exposição a commodities e exterior. Gestão ativa do BB DTVM com alocação tática conforme conjuntura macroeconômica.</div>
+        <div class="risk-bar">
+          <span>Risco:</span>
+          <div class="risk-dot active mid"></div>
+          <div class="risk-dot active mid"></div>
+          <div class="risk-dot active mid"></div>
+          <div class="risk-dot"></div>
+          <div class="risk-dot"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AGGRESSIVE -->
+    <div class="fund-section-header">
+      <h3 style="color:var(--red)">🔴 Fundos Arrojados (Ações)</h3>
+      <div class="line aggressive-line"></div>
+    </div>
+    <div class="grid-4">
+      <div class="fund-card aggressive">
+        <div class="fund-type-label">Arrojado</div>
+        <div class="fund-name">XP Prev Ações Plus</div>
+        <div class="fund-manager">📌 XP Asset Management</div>
+        <div class="fund-stats">
+          <div class="fund-stat">
+            <div class="v" style="color:var(--red)">Ibov+</div>
+            <div class="l">Rentabilidade alvo</div>
+          </div>
+          <div class="fund-stat">
+            <div class="v" style="color:var(--red)">Alto</div>
+            <div class="l">Risco</div>
+          </div>
+        </div>
+        <div class="fund-desc">Carteira concentrada em ações de alto potencial de crescimento (growth), com possibilidade de alocação em ativos internacionais. Volatilidade elevada — requer horizonte mínimo de 10 anos. Alta convicção nas posições.</div>
+        <div class="risk-bar">
+          <span>Risco:</span>
+          <div class="risk-dot active high"></div>
+          <div class="risk-dot active high"></div>
+          <div class="risk-dot active high"></div>
+          <div class="risk-dot active high"></div>
+          <div class="risk-dot active high"></div>
+        </div>
+      </div>
+
+      <div class="fund-card aggressive">
+        <div class="fund-type-label">Arrojado</div>
+        <div class="fund-name">BTG Pactual Prev Ações</div>
+        <div class="fund-manager">📌 BTG Pactual Asset</div>
+        <div class="fund-stats">
+          <div class="fund-stat">
+            <div class="v" style="color:var(--red)">Ibov</div>
+            <div class="l">Rentabilidade alvo</div>
+          </div>
+          <div class="fund-stat">
+            <div class="v" style="color:var(--red)">Alto</div>
+            <div class="l">Risco</div>
+          </div>
+        </div>
+        <div class="fund-desc">Fundo de ações ativas que busca superar o Ibovespa no longo prazo. Carteira diversificada entre setores, com gestão quantitativa e fundamentalista. O BTG Pactual é referência em gestão de ativos no Brasil.</div>
+        <div class="risk-bar">
+          <span>Risco:</span>
+          <div class="risk-dot active high"></div>
+          <div class="risk-dot active high"></div>
+          <div class="risk-dot active high"></div>
+          <div class="risk-dot active high"></div>
+          <div class="risk-dot"></div>
+        </div>
+      </div>
+
+      <div class="fund-card aggressive">
+        <div class="fund-type-label">Arrojado</div>
+        <div class="fund-name">Itaú Flexprev Ações</div>
+        <div class="fund-manager">📌 Itaú Asset Management</div>
+        <div class="fund-stats">
+          <div class="fund-stat">
+            <div class="v" style="color:var(--red)">Ibov</div>
+            <div class="l">Rentabilidade alvo</div>
+          </div>
+          <div class="fund-stat">
+            <div class="v" style="color:var(--red)">Alto</div>
+            <div class="l">Risco</div>
+          </div>
+        </div>
+        <div class="fund-desc">Estratégia focada em blue chips brasileiras e setores defensivos com crescimento consistente. Busca o índice Ibovespa como referência com gestão ativa. Um dos fundos de previdência em ações com maior patrimônio do país.</div>
+        <div class="risk-bar">
+          <span>Risco:</span>
+          <div class="risk-dot active high"></div>
+          <div class="risk-dot active high"></div>
+          <div class="risk-dot active high"></div>
+          <div class="risk-dot active high"></div>
+          <div class="risk-dot"></div>
+        </div>
+      </div>
+
+      <div class="fund-card aggressive">
+        <div class="fund-type-label">Arrojado</div>
+        <div class="fund-name">Safra Prev Global Equity</div>
+        <div class="fund-manager">📌 Banco Safra</div>
+        <div class="fund-stats">
+          <div class="fund-stat">
+            <div class="v" style="color:var(--red)">S&P 500+</div>
+            <div class="l">Rentabilidade alvo</div>
+          </div>
+          <div class="fund-stat">
+            <div class="v" style="color:var(--red)">Muito Alto</div>
+            <div class="l">Risco</div>
+          </div>
+        </div>
+        <div class="fund-desc">Exposição a ações internacionais (EUA, Europa, emergentes) com proteção cambial opcional. Diversificação geográfica que foge do risco Brasil. Ideal para quem busca retornos alinhados ao mercado global de ações.</div>
+        <div class="risk-bar">
+          <span>Risco:</span>
+          <div class="risk-dot active high"></div>
+          <div class="risk-dot active high"></div>
+          <div class="risk-dot active high"></div>
+          <div class="risk-dot active high"></div>
+          <div class="risk-dot active high"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-gold" style="margin-top:28px">
+      <div class="alert-icon">⚠️</div>
+      <div class="alert-body">
+        <strong>Atenção: rentabilidades passadas não garantem resultados futuros.</strong>
+        Os fundos acima são exemplos representativos do mercado e suas características podem ter mudado. As rentabilidades citadas são estimativas históricas. Consulte sempre o prospecto e regulamento do fundo antes de investir, e verifique na SUSEP/PREVIC a regularidade da seguradora/administradora.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 6. OUTROS FATORES ── -->
+<section id="outros-fatores" style="background:#fff">
+  <div class="section-inner">
+    <h2 class="section-title">
+      <span class="icon" style="background:#e3f0ff;">🔍</span>
+      Outros Fatores Importantes
+    </h2>
+    <p class="section-subtitle">Além do tipo de plano e da tributação, há outros elementos fundamentais que influenciam a escolha e os resultados da previdência privada.</p>
+
+    <div class="grid-2">
+      <div class="factor-item">
+        <div class="factor-icon" style="background:#e8f5e9">🔄</div>
+        <div>
+          <div class="factor-title">Portabilidade</div>
+          <div class="factor-text">Você pode migrar recursos entre planos do mesmo tipo (PGBL→PGBL ou VGBL→VGBL) sem pagar IR. Também pode mudar de seguradora mantendo o plano. A portabilidade não altera o prazo contado para fins do regime regressivo. É uma poderosa ferramenta para buscar fundos com taxas menores ou melhor desempenho.</div>
+        </div>
+      </div>
+
+      <div class="factor-item">
+        <div class="factor-icon" style="background:#fef9e7">💸</div>
+        <div>
+          <div class="factor-title">Taxas de Carregamento</div>
+          <div class="factor-text">Cobrada na entrada (sobre cada aporte) e/ou saída (sobre o resgate). Pode variar de 0% a 5%. Muitas seguradoras já zeraram essa taxa, mas ainda existem planos com carregamento. <strong>Prefira sempre planos com taxa de carregamento 0%</strong> — ao longo dos anos, a diferença no saldo final pode ser enorme.</div>
+        </div>
+      </div>
+
+      <div class="factor-item">
+        <div class="factor-icon" style="background:#e3f0ff">⚙️</div>
+        <div>
+          <div class="factor-title">Taxa de Administração</div>
+          <div class="factor-text">Cobrada anualmente sobre o patrimônio do fundo (ex: 1% ao ano). Impacta diretamente a rentabilidade líquida. Varia tipicamente de 0,5% a 4% ao ano. Para planos de longo prazo, uma diferença de 1% ao ano na taxa pode representar 20-30% a menos no saldo final após 30 anos. Priorize fundos com taxas abaixo de 1,5% ao ano.</div>
+        </div>
+      </div>
+
+      <div class="factor-item">
+        <div class="factor-icon" style="background:#fdecea">📊</div>
+        <div>
+          <div class="factor-title">Taxa de Performance</div>
+          <div class="factor-text">Cobrada por alguns fundos mais sofisticados quando superam um benchmark (ex: 20% do que exceder o CDI). Só é cobranda quando o fundo performa acima do índice-alvo. Indica que o gestor só ganha mais quando você também ganha mais — alinhamento de interesses.</div>
+        </div>
+      </div>
+
+      <div class="factor-item">
+        <div class="factor-icon" style="background:#f3e5f5">👨‍👩‍👧</div>
+        <div>
+          <div class="factor-title">Beneficiários e Herança</div>
+          <div class="factor-text">A previdência privada permite designar beneficiários de forma direta, sem precisar de inventário (em regra). Em caso de falecimento do titular, os valores são transferidos rapidamente aos beneficiários indicados — o que pode levar de dias a semanas, em vez dos meses ou anos de um inventário convencional. <em>Atenção: alguns estados estão tributando previdência com ITCMD.</em></div>
+        </div>
+      </div>
+
+      <div class="factor-item">
+        <div class="factor-icon" style="background:#e8f5e9">🛡️</div>
+        <div>
+          <div class="factor-title">Cobertura em Caso de Morte ou Invalidez</div>
+          <div class="factor-text">Alguns planos oferecem coberturas adicionais, como renda por invalidez permanente ou pecúlio por morte. Essas coberturas têm custo separado (deduzido do saldo ou em forma de prêmio). Avalie se o custo vale a proteção — muitas vezes um seguro de vida separado é mais eficiente.</div>
+        </div>
+      </div>
+
+      <div class="factor-item">
+        <div class="factor-icon" style="background:#fef9e7">📅</div>
+        <div>
+          <div class="factor-title">Carência para Resgate</div>
+          <div class="factor-text">A maioria dos planos exige um prazo mínimo de carência antes do primeiro resgate (geralmente 60 dias a 2 anos). Após a carência inicial, é possível fazer resgates parciais — mas sujeitos à tributação e eventual IOF. Resgates frequentes podem esvaziar o plano mais rapidamente do que o esperado.</div>
+        </div>
+      </div>
+
+      <div class="factor-item">
+        <div class="factor-icon" style="background:#e3f0ff">🏦</div>
+        <div>
+          <div class="factor-title">Não está coberto pelo FGC</div>
+          <div class="factor-text">Ao contrário de CDBs e poupança, a previdência privada <strong>não é garantida pelo FGC</strong> (Fundo Garantidor de Créditos). O risco é da seguradora/entidade. No entanto, a SUSEP (VGBL) e a PREVIC (PGBL) regulam e fiscalizam rigorosamente o setor, e as principais seguradoras têm solidez financeira comprovada.</div>
+        </div>
+      </div>
+
+      <div class="factor-item">
+        <div class="factor-icon" style="background:#e8f5e9">🎯</div>
+        <div>
+          <div class="factor-title">Tipos de Renda no Benefício</div>
+          <div class="factor-text">Na fase de benefícios, você pode escolher: <strong>renda vitalícia</strong> (recebe até morrer), <strong>renda por prazo certo</strong> (x anos), <strong>renda vitalícia com reversão ao cônjuge</strong>, <strong>renda temporária</strong> e outras combinações. O resgate total também é uma opção. Cada modalidade tem implicações tributárias e de planejamento diferentes.</div>
+        </div>
+      </div>
+
+      <div class="factor-item">
+        <div class="factor-icon" style="background:#fdecea">⚡</div>
+        <div>
+          <div class="factor-title">Limite PGBL: 12% da Renda</div>
+          <div class="factor-text">O benefício fiscal do PGBL é limitado a <strong>12% da renda bruta tributável anual</strong>. Investir mais do que isso no PGBL não gera benefício adicional — o excedente pode ser alocado em VGBL. Exemplo: renda bruta de R$ 100.000/ano → limite de R$ 12.000 em PGBL dedutível no IR.</div>
+        </div>
+      </div>
+
+      <div class="factor-item">
+        <div class="factor-icon" style="background:#f3e5f5">🌍</div>
+        <div>
+          <div class="factor-title">Fundos com Exposição Internacional</div>
+          <div class="factor-text">Alguns planos permitem alocação em ativos do exterior (ações americanas, europeias, emergentes). Isso adiciona proteção cambial — quando o dólar sobe, o saldo em reais também sobe. Fundos internacionais na previdência têm vantagem tributária em relação à compra direta de ETFs internacionais no mercado.</div>
+        </div>
+      </div>
+
+      <div class="factor-item">
+        <div class="factor-icon" style="background:#e8f5e9">📱</div>
+        <div>
+          <div class="factor-title">Como escolher uma boa seguradora</div>
+          <div class="factor-text">Verifique: rating de solidez financeira (Fitch, Moody's, S&P), histórico de rentabilidade dos fundos, transparência nas taxas, facilidade de acesso digital, opções de portabilidade e reputação no mercado. Seguradoras ligadas a grandes bancos têm maior segurança, mas fintechs especializadas podem oferecer melhores taxas.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 7. SIMULADOR ── -->
+<section id="simulador">
+  <div class="section-inner">
+    <h2 class="section-title">
+      <span class="icon" style="background:rgba(255,255,255,0.1)">🧮</span>
+      Simulador de Previdência Privada
+    </h2>
+    <p class="section-subtitle">Preencha os campos abaixo para projetar o crescimento do seu investimento, calcular o IR no resgate e comparar diferentes cenários.</p>
+
+    <div class="grid-2">
+      <!-- FORM -->
+      <div>
+        <div class="sim-card">
+          <div class="sim-card-label">📊 Dados do Investidor</div>
+
+          <div class="form-group">
+            <label>Tipo de Plano</label>
+            <select class="form-control" id="s-tipo">
+              <option value="pgbl">PGBL — Benefício fiscal na entrada</option>
+              <option value="vgbl">VGBL — IR só sobre rendimentos</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Regime de Tributação</label>
+            <select class="form-control" id="s-regime">
+              <option value="regressivo">Regressivo (recomendado para longo prazo)</option>
+              <option value="progressivo">Progressivo (compensável na declaração)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Renda Bruta Anual Tributável <span class="hint">(para calcular o benefício do PGBL)</span></label>
+            <input type="number" class="form-control" id="s-renda" placeholder="Ex: 120000" min="0" />
+          </div>
+
+          <div class="form-group">
+            <label>Aporte Mensal (R$)</label>
+            <input type="number" class="form-control" id="s-aporte" placeholder="Ex: 1000" min="0" />
+          </div>
+
+          <div class="form-group">
+            <label>Aporte Inicial (R$) <span class="hint">(opcional)</span></label>
+            <input type="number" class="form-control" id="s-inicial" placeholder="Ex: 5000" min="0" value="0" />
+          </div>
+
+          <div class="form-group">
+            <label>Prazo de Investimento (anos)</label>
+            <input type="number" class="form-control" id="s-prazo" placeholder="Ex: 20" min="1" max="60" />
+          </div>
+
+          <div class="form-group">
+            <label>Perfil do Fundo (rentabilidade anual estimada)</label>
+            <select class="form-control" id="s-perfil">
+              <option value="0.008">🟢 Conservador — ~CDI (≈ 10,5% a.a. em 2025)</option>
+              <option value="0.012" selected>🔵 Moderado — CDI + 2% (≈ 12,5% a.a.)</option>
+              <option value="0.015">🔴 Arrojado — CDI + 4% (≈ 14,5% a.a.)</option>
+              <option value="custom">✏️ Personalizado...</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="s-custom-group" style="display:none">
+            <label>Taxa Anual Personalizada (%)</label>
+            <input type="number" class="form-control" id="s-taxa" placeholder="Ex: 11" step="0.1" min="0" max="50" />
+          </div>
+
+          <div class="form-group">
+            <label>Taxa de Administração Anual (%)</label>
+            <input type="number" class="form-control" id="s-admin" placeholder="Ex: 1.0" step="0.1" min="0" max="5" value="1.0" />
+          </div>
+
+          <div class="form-group">
+            <label>Taxa de Carregamento na Entrada (%)</label>
+            <input type="number" class="form-control" id="s-carga" placeholder="Ex: 0" step="0.1" min="0" max="10" value="0" />
+          </div>
+
+          <!-- TESOURO DIRETO INPUTS -->
+          <div class="tesouro-inputs-header">
+            <span style="font-size:1.3rem">🏛️</span>
+            <div class="sim-card-label">Tesouro Direto — Para Comparação</div>
+          </div>
+          <p style="font-size:0.82rem; color:rgba(255,255,255,0.45); margin-bottom:16px; margin-top:-8px;">
+            Preencha as taxas atuais dos títulos públicos para que o simulador compare automaticamente o Tesouro Direto com a previdência privada.
+          </p>
+
+          <div class="form-group">
+            <label>Tesouro Selic — Taxa Selic atual (% a.a.) <span class="hint">≈ 10,5% em 2025</span></label>
+            <input type="number" class="form-control" id="t-selic" placeholder="Ex: 10.5" step="0.1" min="0" value="10.5" />
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div class="form-group" style="margin-bottom:0">
+              <label>IPCA+ — Taxa Real (% a.a.) <span class="hint">≈ 6,5%</span></label>
+              <input type="number" class="form-control" id="t-ipca-real" placeholder="Ex: 6.5" step="0.1" min="0" value="6.5" />
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <label>Expectativa IPCA (% a.a.) <span class="hint">Meta ≈ 4,5%</span></label>
+              <input type="number" class="form-control" id="t-ipca" placeholder="Ex: 4.5" step="0.1" min="0" value="4.5" />
+            </div>
+          </div>
+          <p style="font-size:0.75rem; color:rgba(255,255,255,0.35); margin: 4px 0 16px;">
+            Taxa nominal IPCA+ = (1 + real) × (1 + IPCA) − 1
+          </p>
+
+          <div class="form-group">
+            <label>Tesouro Prefixado — Taxa nominal (% a.a.) <span class="hint">≈ 13% em 2025</span></label>
+            <input type="number" class="form-control" id="t-pre" placeholder="Ex: 13.0" step="0.1" min="0" value="13.0" />
+          </div>
+
+          <div class="alert" style="background:rgba(255,255,255,0.04); border-left:3px solid rgba(230,168,23,0.5); padding:10px 14px; margin-bottom:18px;">
+            <div style="font-size:0.8rem; color:rgba(255,255,255,0.5); line-height:1.55;">
+              ℹ️ O Tesouro Direto é tributado a <strong style="color:rgba(255,255,255,0.75)">15% sobre os rendimentos</strong> (acima de 720 dias) e tem custódia B3 de <strong style="color:rgba(255,255,255,0.75)">0,2% a.a.</strong> Não há taxa de carregamento.
+            </div>
+          </div>
+
+          <button class="btn-sim" onclick="calcular()">🧮 Calcular Projeção e Comparativo</button>
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div>
+        <div class="result-box" id="result-box">
+          <div class="result-title">📈 Projeção de Acumulação</div>
+          <div class="result-row">
+            <span class="result-label">Total investido (aportes)</span>
+            <span class="result-value" id="r-total-investido">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Saldo bruto no final</span>
+            <span class="result-value positive big" id="r-saldo-bruto">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Rendimentos gerados</span>
+            <span class="result-value positive" id="r-rendimentos">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Retorno total bruto</span>
+            <span class="result-value positive" id="r-retorno-bruto">—</span>
+          </div>
+
+          <hr class="result-divider">
+          <div class="result-title">🏛️ Tributação no Resgate Total</div>
+          <div class="result-row">
+            <span class="result-label">Alíquota de IR aplicável</span>
+            <span class="result-value" id="r-aliquota">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Base de cálculo do IR</span>
+            <span class="result-value" id="r-base-ir">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">IR estimado no resgate</span>
+            <span class="result-value negative" id="r-ir">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">IOF (se aplicável)</span>
+            <span class="result-value" id="r-iof">R$ 0,00</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">🏆 Saldo líquido (após impostos)</span>
+            <span class="result-value positive big" id="r-liquido">—</span>
+          </div>
+
+          <hr class="result-divider">
+          <div class="result-title">💰 Benefício PGBL (se aplicável)</div>
+          <div class="result-row">
+            <span class="result-label">Limite dedutível no PGBL/ano</span>
+            <span class="result-value" id="r-limite-pgbl">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Economia de IR anual (PGBL)</span>
+            <span class="result-value positive" id="r-economia-ir">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Economia total acumulada (PGBL)</span>
+            <span class="result-value positive" id="r-economia-total">—</span>
+          </div>
+
+          <hr class="result-divider">
+          <div class="result-title">📊 Projeção de Renda Mensal</div>
+          <div class="result-row">
+            <span class="result-label">Renda mensal bruta (saldo × 0,5%/mês)</span>
+            <span class="result-value positive" id="r-renda-bruta">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Renda mensal líquida estimada</span>
+            <span class="result-value positive" id="r-renda-liquida">—</span>
+          </div>
+
+          <div class="result-benefit" id="r-benefit-box">
+            <div class="result-benefit-title">💡 Análise da Previdência</div>
+            <div class="result-benefit-text" id="r-analysis">—</div>
+          </div>
+
+          <!-- ── COMPARATIVO TESOURO DIRETO ── -->
+          <hr class="result-divider">
+          <div class="result-title">🏛️ Comparativo — Previdência vs. Tesouro Direto</div>
+
+          <div class="comp-table-wrap">
+            <table class="comp-table">
+              <thead>
+                <tr>
+                  <th class="row-label">Métrica</th>
+                  <th id="th-prev">
+                    <span class="comp-header-pill pill-prev">Previdência</span>
+                    <span id="th-prev-sub" style="font-size:0.72rem; color:rgba(255,255,255,0.45); font-weight:400; display:block">PGBL/VGBL</span>
+                  </th>
+                  <th id="th-selic">
+                    <span class="comp-header-pill pill-selic">Tesouro Selic</span>
+                    <span id="th-selic-sub" style="font-size:0.72rem; color:rgba(255,255,255,0.45); font-weight:400; display:block">Pós-fixado</span>
+                  </th>
+                  <th id="th-ipca">
+                    <span class="comp-header-pill pill-ipca">Tesouro IPCA+</span>
+                    <span id="th-ipca-sub" style="font-size:0.72rem; color:rgba(255,255,255,0.45); font-weight:400; display:block">Real + Inflação</span>
+                  </th>
+                  <th id="th-pre">
+                    <span class="comp-header-pill pill-pre">Tesouro Prefixado</span>
+                    <span id="th-pre-sub" style="font-size:0.72rem; color:rgba(255,255,255,0.45); font-weight:400; display:block">Taxa fixa</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="row-label">Taxa bruta a.a.</td>
+                  <td class="col-prev"><span id="c-prev-taxa" class="comp-value">—</span></td>
+                  <td class="col-selic"><span id="c-selic-taxa" class="comp-value">—</span></td>
+                  <td class="col-ipca"><span id="c-ipca-taxa" class="comp-value">—</span></td>
+                  <td class="col-pre"><span id="c-pre-taxa" class="comp-value">—</span></td>
+                </tr>
+                <tr>
+                  <td class="row-label">Custo anual</td>
+                  <td class="col-prev"><span id="c-prev-custo" class="comp-value">—</span></td>
+                  <td class="col-selic"><span class="comp-value" style="color:rgba(255,255,255,0.6)">0,20% (B3)</span></td>
+                  <td class="col-ipca"><span class="comp-value" style="color:rgba(255,255,255,0.6)">0,20% (B3)</span></td>
+                  <td class="col-pre"><span class="comp-value" style="color:rgba(255,255,255,0.6)">0,20% (B3)</span></td>
+                </tr>
+                <tr>
+                  <td class="row-label">IR no resgate</td>
+                  <td class="col-prev"><span id="c-prev-ir-label" class="comp-value">—</span></td>
+                  <td class="col-selic"><span class="comp-value" style="color:rgba(255,255,255,0.6)">15% s/ rendimentos</span></td>
+                  <td class="col-ipca"><span class="comp-value" style="color:rgba(255,255,255,0.6)">15% s/ rendimentos*</span></td>
+                  <td class="col-pre"><span class="comp-value" style="color:rgba(255,255,255,0.6)">15% s/ rendimentos</span></td>
+                </tr>
+                <tr>
+                  <td class="row-label">Saldo bruto final</td>
+                  <td class="col-prev"><span id="c-prev-bruto" class="comp-value pos">—</span></td>
+                  <td class="col-selic"><span id="c-selic-bruto" class="comp-value pos">—</span></td>
+                  <td class="col-ipca"><span id="c-ipca-bruto" class="comp-value pos">—</span></td>
+                  <td class="col-pre"><span id="c-pre-bruto" class="comp-value pos">—</span></td>
+                </tr>
+                <tr>
+                  <td class="row-label">IR estimado</td>
+                  <td class="col-prev"><span id="c-prev-ir" class="comp-value neg">—</span></td>
+                  <td class="col-selic"><span id="c-selic-ir" class="comp-value neg">—</span></td>
+                  <td class="col-ipca"><span id="c-ipca-ir" class="comp-value neg">—</span></td>
+                  <td class="col-pre"><span id="c-pre-ir" class="comp-value neg">—</span></td>
+                </tr>
+                <tr>
+                  <td class="row-label">🏆 Saldo líquido</td>
+                  <td class="col-prev" id="td-prev-liq"><span id="c-prev-liq" class="comp-value gold">—</span></td>
+                  <td class="col-selic" id="td-selic-liq"><span id="c-selic-liq" class="comp-value gold">—</span></td>
+                  <td class="col-ipca" id="td-ipca-liq"><span id="c-ipca-liq" class="comp-value gold">—</span></td>
+                  <td class="col-pre" id="td-pre-liq"><span id="c-pre-liq" class="comp-value gold">—</span></td>
+                </tr>
+                <tr>
+                  <td class="row-label">Benefício PGBL<br><span style="font-size:0.7rem; font-weight:400; color:rgba(255,255,255,0.35)">(economia IR acumulada)</span></td>
+                  <td class="col-prev"><span id="c-prev-pgbl" class="comp-value" style="color:#55efc4">—</span></td>
+                  <td class="col-selic"><span class="comp-value" style="color:rgba(255,255,255,0.3)">Não disponível</span></td>
+                  <td class="col-ipca"><span class="comp-value" style="color:rgba(255,255,255,0.3)">Não disponível</span></td>
+                  <td class="col-pre"><span class="comp-value" style="color:rgba(255,255,255,0.3)">Não disponível</span></td>
+                </tr>
+                <tr style="font-size:1.05rem;">
+                  <td class="row-label">✅ Total incl. benefício fiscal</td>
+                  <td class="col-prev" id="td-prev-total"><span id="c-prev-total" class="comp-value gold">—</span></td>
+                  <td class="col-selic" id="td-selic-total"><span id="c-selic-total" class="comp-value gold">—</span></td>
+                  <td class="col-ipca" id="td-ipca-total"><span id="c-ipca-total" class="comp-value gold">—</span></td>
+                  <td class="col-pre" id="td-pre-total"><span id="c-pre-total" class="comp-value gold">—</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p style="font-size:0.73rem; color:rgba(255,255,255,0.3); margin-top:6px;">
+            *No Tesouro IPCA+, o IR de 15% incide sobre o rendimento nominal total — incluindo a parcela de correção pela inflação.
+          </p>
+
+          <div class="comp-analysis" id="comp-analysis">—</div>
+
+          <div class="comp-insight" id="comp-insight-fee" style="display:none">
+            <span>⚙️</span>
+            <span id="comp-insight-fee-text"></span>
+          </div>
+          <div class="comp-insight" id="comp-insight-pgbl" style="display:none">
+            <span>🎯</span>
+            <span id="comp-insight-pgbl-text"></span>
+          </div>
+        </div>
+
+        <div id="empty-state" style="text-align:center; padding:60px 20px; color:rgba(255,255,255,0.4)">
+          <div style="font-size:4rem; margin-bottom:16px">🧮</div>
+          <div style="font-size:1rem;">Preencha os dados ao lado e clique em<br><strong style="color:var(--gold-light)">Calcular Projeção</strong> para ver os resultados</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── GLOSSÁRIO ── -->
+<section style="background:#fff">
+  <div class="section-inner">
+    <h2 class="section-title">
+      <span class="icon" style="background:#e8f5e9;">📚</span>
+      Glossário Rápido
+    </h2>
+    <p class="section-subtitle">Termos comuns que você vai encontrar ao pesquisar previdência privada.</p>
+    <div class="grid-2">
+      <div>
+        <div class="gloss-item"><div class="gloss-term">FIE — Fundo de Investimento Especialmente Constituído</div><div class="gloss-def">O fundo que recebe os aportes do plano de previdência. É regulamentado de forma especial pela SUSEP/PREVIC.</div></div>
+        <div class="gloss-item"><div class="gloss-term">CDI — Certificado de Depósito Interbancário</div><div class="gloss-def">Taxa de referência do mercado interbancário, usada como benchmark por fundos conservadores. Muito próxima da taxa Selic.</div></div>
+        <div class="gloss-item"><div class="gloss-term">IPCA</div><div class="gloss-def">Índice de Preços ao Consumidor Amplo — principal índice de inflação do Brasil. Fundos de longo prazo buscam superar o IPCA.</div></div>
+        <div class="gloss-item"><div class="gloss-term">NTN-B (Tesouro IPCA+)</div><div class="gloss-def">Título público que remunera IPCA + taxa prefixada. Muito usado em fundos conservadores de previdência para proteção contra a inflação.</div></div>
+        <div class="gloss-item"><div class="gloss-term">LFT (Tesouro Selic)</div><div class="gloss-def">Título público pós-fixado vinculado à taxa Selic. Base dos fundos conservadores de curtíssimo prazo.</div></div>
+      </div>
+      <div>
+        <div class="gloss-item"><div class="gloss-term">Alíquota Marginal</div><div class="gloss-def">A maior alíquota de IR que incide sobre a sua renda — a última faixa da tabela progressiva que você atinge. Determinante para avaliar o benefício do PGBL.</div></div>
+        <div class="gloss-item"><div class="gloss-term">Portabilidade</div><div class="gloss-def">Transferência de recursos entre planos de previdência sem incidência de IR. Válida apenas entre planos do mesmo tipo (PGBL→PGBL ou VGBL→VGBL).</div></div>
+        <div class="gloss-item"><div class="gloss-term">SUSEP</div><div class="gloss-def">Superintendência de Seguros Privados. Regula e fiscaliza o mercado de seguros, previdência aberta (VGBL) e capitalização no Brasil.</div></div>
+        <div class="gloss-item"><div class="gloss-term">PREVIC</div><div class="gloss-def">Superintendência Nacional de Previdência Complementar. Fiscaliza os planos PGBL e a previdência complementar fechada (fundos de pensão).</div></div>
+        <div class="gloss-item"><div class="gloss-term">Rebalanceamento</div><div class="gloss-def">Processo de ajuste periódico das proporções de ativos na carteira para manter a alocação-alvo. Ex: vender ações que subiram e comprar renda fixa.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <strong>Guia de Previdência Privada</strong> · Material educativo e informativo<br>
+  Elaborado com dados de mercado atualizados até 2025
+  <div class="disclaimer">
+    ⚠️ <strong>AVISO LEGAL:</strong> Este material tem caráter exclusivamente educativo e informativo. Não constitui recomendação de investimento, consultoria financeira ou assessoria jurídica. As tabelas de IR e IOF são baseadas na legislação vigente em 2024/2025 e podem ter sido alteradas. Rentabilidades passadas não garantem retornos futuros. Consulte sempre um assessor de investimentos certificado (CEA/CFP) e um contador ou advogado tributarista antes de tomar decisões de investimento.
+  </div>
+</footer>
+
+<script>
+  // ── TAB SWITCHING ──
+  function switchTab(name) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // ── CUSTOM RATE TOGGLE ──
+  document.getElementById('s-perfil').addEventListener('change', function() {
+    document.getElementById('s-custom-group').style.display = this.value === 'custom' ? 'block' : 'none';
+  });
+
+  // ── FORMATTERS ──
+  const fmtBRL  = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  const fmtPct  = v => (v * 100).toFixed(2) + '%';
+  const fmtPct0 = v => (v * 100).toFixed(1) + '%';
+
+  // ── PROGRESSIVE IR — tabela anual 2024/2025 ──
+  function irProgressivo(base) {
+    if (base <= 27110.40) return 0;
+    if (base <= 33919.80) return base * 0.075  - 2033.28;
+    if (base <= 45012.60) return base * 0.15   - 4576.08;
+    if (base <= 55976.16) return base * 0.225  - 7953.22;
+    return base * 0.275 - 10752.05;
+  }
+  function aliquotaMarginal(renda) {
+    if (renda <= 27110.40) return 0;
+    if (renda <= 33919.80) return 0.075;
+    if (renda <= 45012.60) return 0.15;
+    if (renda <= 55976.16) return 0.225;
+    return 0.275;
+  }
+
+  // ── REGRESSIVE IR ──
+  function irRegressivo(anos) {
+    if (anos <= 2)  return 0.35;
+    if (anos <= 4)  return 0.30;
+    if (anos <= 6)  return 0.25;
+    if (anos <= 8)  return 0.20;
+    if (anos <= 10) return 0.15;
+    return 0.10;
+  }
+
+  // ── FUTURE VALUE (monthly compounding) ──
+  // taxaAnualLiquida: decimal (e.g. 0.105), n: months, pmt: monthly contribution, pv: initial
+  function calcFV(taxaAnualLiquida, n, pmt, pv) {
+    const r = Math.pow(1 + taxaAnualLiquida, 1/12) - 1;
+    return pv * Math.pow(1 + r, n) + pmt * (Math.pow(1 + r, n) - 1) / r;
+  }
+
+  // ── MAIN CALCULATOR ──
+  function calcular() {
+    // ── Read previdência inputs ──
+    const tipo    = document.getElementById('s-tipo').value;
+    const regime  = document.getElementById('s-regime').value;
+    const renda   = parseFloat(document.getElementById('s-renda').value)   || 0;
+    const aporteMensal  = parseFloat(document.getElementById('s-aporte').value)  || 0;
+    const aporteInicial = parseFloat(document.getElementById('s-inicial').value) || 0;
+    const prazo   = parseInt(document.getElementById('s-prazo').value)  || 0;
+    const adminAnual = (parseFloat(document.getElementById('s-admin').value) || 0) / 100;
+    const carga      = (parseFloat(document.getElementById('s-carga').value) || 0) / 100;
+
+    // ── Read Tesouro inputs ──
+    const selicRate  = (parseFloat(document.getElementById('t-selic').value)    || 10.5) / 100;
+    const ipcaReal   = (parseFloat(document.getElementById('t-ipca-real').value) || 6.5) / 100;
+    const ipcaExp    = (parseFloat(document.getElementById('t-ipca').value)      || 4.5) / 100;
+    const preRate    = (parseFloat(document.getElementById('t-pre').value)       || 13.0) / 100;
+    const custodiaB3 = 0.002; // 0,20% a.a. B3
+
+    // Tesouro IPCA+ nominal = (1+real)*(1+IPCA) - 1
+    const ipcaNominal = (1 + ipcaReal) * (1 + ipcaExp) - 1;
+
+    if (aporteMensal <= 0 || prazo <= 0) {
+      alert('Por favor, preencha o aporte mensal e o prazo de investimento.');
+      return;
+    }
+
+    const n = prazo * 12;
+
+    // ── Previdência ──
+    let taxaAnual;
+    const perfilVal = document.getElementById('s-perfil').value;
+    if (perfilVal === 'custom') {
+      taxaAnual = (parseFloat(document.getElementById('s-taxa').value) || 0) / 100;
+    } else {
+      const baseRates = { '0.008': 0.105, '0.012': 0.125, '0.015': 0.145 };
+      taxaAnual = baseRates[perfilVal] || 0.105;
+    }
+
+    const taxaLiquidaAnual = taxaAnual - adminAnual;
+    const aporteEfetivo  = aporteMensal  * (1 - carga);
+    const inicialEfetivo = aporteInicial * (1 - carga);
+    const totalInvestido = aporteInicial + (aporteMensal * n);
+    const totalEfetivo   = inicialEfetivo + (aporteEfetivo * n);
+
+    const fv = calcFV(taxaLiquidaAnual, n, aporteEfetivo, inicialEfetivo);
+    const rendimentos = fv - totalEfetivo;
+
+    // IR previdência
+    let irValor = 0, baseIR = 0, aliquota = 0, aliquotaLabel = '';
+    if (regime === 'regressivo') {
+      aliquota = irRegressivo(prazo);
+      aliquotaLabel = (aliquota * 100).toFixed(0) + '% (regressivo, ' + prazo + ' anos)';
+      baseIR   = (tipo === 'pgbl') ? fv : rendimentos;
+      irValor  = baseIR * aliquota;
+    } else {
+      baseIR  = (tipo === 'pgbl') ? fv : rendimentos;
+      irValor = irProgressivo(baseIR);
+      aliquota = baseIR > 0 ? irValor / baseIR : 0;
+      aliquotaLabel = 'Progressivo — efetiva ' + fmtPct(aliquota) + (tipo === 'pgbl' ? ' (total)' : ' (rendimentos)');
+    }
+    const saldoLiquido = fv - irValor;
+
+    // PGBL benefit
+    const limitePGBL  = renda * 0.12;
+    const aporteAnual = aporteMensal * 12;
+    const pgblDedutivel    = Math.min(aporteAnual, limitePGBL);
+    const aliquotaMargInv  = aliquotaMarginal(renda);
+    const economiaAnual    = (tipo === 'pgbl') ? pgblDedutivel * aliquotaMargInv : 0;
+    const economiaTotal    = economiaAnual * prazo;
+    const prevTotalComPGBL = saldoLiquido + economiaTotal;
+
+    // Monthly income estimate (0.5%/mês do saldo)
+    const rendaMensalBruta  = saldoLiquido * 0.005;
+    const irMensal          = irProgressivo(rendaMensalBruta * 12) / 12;
+    const rendaMensalLiquida = rendaMensalBruta - (regime === 'progressivo' ? irMensal : rendaMensalBruta * aliquota);
+
+    // Análise previdência
+    let analysis = '';
+    if (prazo >= 10 && regime === 'regressivo') {
+      analysis = `✅ Com ${prazo} anos no regime regressivo, você paga apenas ${(aliquota*100).toFixed(0)}% de IR — a menor alíquota da previdência. Saldo líquido estimado: ${fmtBRL(saldoLiquido)}, equivalente a uma renda mensal de ≈ ${fmtBRL(Math.max(0, rendaMensalLiquida))}.`;
+    } else if (prazo < 6) {
+      analysis = `⚠️ Com apenas ${prazo} anos, a alíquota regressiva é ${(aliquota*100).toFixed(0)}% — bastante elevada. Para prazos curtos o Tesouro Direto (15% s/ rendimentos) pode ser mais vantajoso. Veja o comparativo abaixo.`;
+    } else {
+      analysis = `📊 Em ${prazo} anos com aporte de ${fmtBRL(aporteMensal)}/mês, o patrimônio bruto projetado é ${fmtBRL(fv)}. Após IR (${(aliquota*100).toFixed(0)}%), o saldo líquido é ${fmtBRL(saldoLiquido)}.`;
+    }
+    if (tipo === 'pgbl' && economiaTotal > 0) {
+      analysis += ` O benefício fiscal do PGBL pode adicionar ${fmtBRL(economiaTotal)} em restituições acumuladas.`;
+    }
+
+    // ── Tesouro Direto calculations ──
+    // IR Tesouro: 15% sobre rendimentos (prazo > 720 dias = > 2 anos; caso contrário usa tabela)
+    function irTesouroPct(anos) {
+      if (anos <= 0.5)  return 0.225;
+      if (anos <= 1)    return 0.20;
+      if (anos <= 2)    return 0.175;
+      return 0.15; // acima de 2 anos → 15%
+    }
+    const irTdPct = irTesouroPct(prazo);
+
+    // Selic
+    const selicLiq = selicRate - custodiaB3;
+    const fvSelic  = calcFV(selicLiq, n, aporteMensal, aporteInicial);
+    const rendSelic = fvSelic - totalInvestido;
+    const irSelic   = rendSelic * irTdPct;
+    const liqSelic  = fvSelic - irSelic;
+
+    // IPCA+
+    const ipcaLiq  = ipcaNominal - custodiaB3;
+    const fvIPCA   = calcFV(ipcaLiq, n, aporteMensal, aporteInicial);
+    const rendIPCA = fvIPCA - totalInvestido;
+    const irIPCA   = rendIPCA * irTdPct;  // IR incide INCLUSIVE sobre correção inflacionária
+    const liqIPCA  = fvIPCA - irIPCA;
+
+    // Prefixado
+    const preLiq   = preRate - custodiaB3;
+    const fvPre    = calcFV(preLiq, n, aporteMensal, aporteInicial);
+    const rendPre  = fvPre - totalInvestido;
+    const irPre    = rendPre * irTdPct;
+    const liqPre   = fvPre - irPre;
+
+    // ── Determina vencedor (saldo líquido + benefício fiscal) ──
+    const scores = [
+      { id: 'prev',  val: prevTotalComPGBL },
+      { id: 'selic', val: liqSelic },
+      { id: 'ipca',  val: liqIPCA },
+      { id: 'pre',   val: liqPre }
+    ];
+    const winner = scores.reduce((a, b) => a.val > b.val ? a : b).id;
+
+    // Helper: marca vencedor e remove de outros
+    const allTds  = ['prev','selic','ipca','pre'];
+    const allCols = { prev:'col-prev', selic:'col-selic', ipca:'col-ipca', pre:'col-pre' };
+    allTds.forEach(id => {
+      const td = document.getElementById('td-' + id + '-total');
+      td.className = allCols[id] + (id === winner ? ' col-winner' : '');
+      const td2 = document.getElementById('td-' + id + '-liq');
+      td2.className = allCols[id] + (id === winner ? ' col-winner' : '');
+      // remove old crown
+      const existing = document.getElementById('crown-' + id);
+      if (existing) existing.remove();
+    });
+    // Add crown to winner
+    const winnerEl = document.getElementById('c-' + winner + '-total');
+    const crown = document.createElement('span');
+    crown.id = 'crown-' + winner;
+    crown.className = 'winner-crown';
+    crown.textContent = '🏆 melhor';
+    winnerEl.parentNode.insertBefore(crown, winnerEl.nextSibling);
+
+    // ── Fill comparison table ──
+    // Previdência
+    document.getElementById('th-prev-sub').textContent = tipo.toUpperCase() + ' · ' + (regime === 'regressivo' ? 'Regressivo' : 'Progressivo');
+    document.getElementById('c-prev-taxa').textContent  = fmtPct0(taxaAnual);
+    document.getElementById('c-prev-custo').textContent = fmtPct0(adminAnual) + ' (adm.)' + (carga > 0 ? ' + ' + fmtPct0(carga) + ' (carg.)' : '');
+    document.getElementById('c-prev-ir-label').textContent = (aliquota*100).toFixed(0) + '%' + (tipo === 'pgbl' ? ' s/ total' : ' s/ rend.');
+    document.getElementById('c-prev-bruto').textContent = fmtBRL(fv);
+    document.getElementById('c-prev-ir').textContent    = '− ' + fmtBRL(irValor);
+    document.getElementById('c-prev-liq').textContent   = fmtBRL(saldoLiquido);
+    document.getElementById('c-prev-pgbl').textContent  = economiaTotal > 0 ? '+ ' + fmtBRL(economiaTotal) : 'N/A (VGBL)';
+    document.getElementById('c-prev-total').textContent = fmtBRL(prevTotalComPGBL);
+
+    // Tesouro Selic
+    document.getElementById('th-selic-sub').textContent = 'Selic ' + fmtPct0(selicRate) + ' a.a.';
+    document.getElementById('c-selic-taxa').textContent = fmtPct0(selicRate);
+    document.getElementById('c-selic-bruto').textContent = fmtBRL(fvSelic);
+    document.getElementById('c-selic-ir').textContent    = '− ' + fmtBRL(irSelic);
+    document.getElementById('c-selic-liq').textContent   = fmtBRL(liqSelic);
+    document.getElementById('c-selic-total').textContent = fmtBRL(liqSelic);
+
+    // Tesouro IPCA+
+    document.getElementById('th-ipca-sub').textContent  = 'IPCA+' + fmtPct0(ipcaReal) + ' ≈ ' + fmtPct0(ipcaNominal) + ' nominal';
+    document.getElementById('c-ipca-taxa').textContent  = fmtPct0(ipcaNominal) + ' (nominal)';
+    document.getElementById('c-ipca-bruto').textContent = fmtBRL(fvIPCA);
+    document.getElementById('c-ipca-ir').textContent    = '− ' + fmtBRL(irIPCA);
+    document.getElementById('c-ipca-liq').textContent   = fmtBRL(liqIPCA);
+    document.getElementById('c-ipca-total').textContent = fmtBRL(liqIPCA);
+
+    // Tesouro Prefixado
+    document.getElementById('th-pre-sub').textContent  = 'Prefixado ' + fmtPct0(preRate) + ' a.a.';
+    document.getElementById('c-pre-taxa').textContent  = fmtPct0(preRate);
+    document.getElementById('c-pre-bruto').textContent = fmtBRL(fvPre);
+    document.getElementById('c-pre-ir').textContent    = '− ' + fmtBRL(irPre);
+    document.getElementById('c-pre-liq').textContent   = fmtBRL(liqPre);
+    document.getElementById('c-pre-total').textContent = fmtBRL(liqPre);
+
+    // ── Análise comparativa ──
+    const winnerNames = { prev:'Previdência Privada', selic:'Tesouro Selic', ipca:'Tesouro IPCA+', pre:'Tesouro Prefixado' };
+    const diffPrevSelic = prevTotalComPGBL - liqSelic;
+    const diffPrevBest  = prevTotalComPGBL - Math.max(liqSelic, liqIPCA, liqPre);
+
+    let compText = '';
+    if (winner === 'prev') {
+      compText = `✅ A Previdência Privada vence neste cenário, acumulando ${fmtBRL(Math.abs(diffPrevBest))} a mais que o melhor título do Tesouro Direto.`;
+      if (tipo === 'pgbl' && economiaTotal > 0) {
+        compText += ` O benefício fiscal do PGBL (${fmtBRL(economiaTotal)} acumulados em restituições) é o principal fator de vantagem.`;
+      }
+      if (prazo >= 10 && regime === 'regressivo') {
+        compText += ` A alíquota regressiva de ${(aliquota*100).toFixed(0)}% (vs. 15% do Tesouro) também contribui significativamente.`;
+      }
+    } else {
+      compText = `📊 ${winnerNames[winner]} vence neste cenário. A Previdência ficou ${fmtBRL(Math.abs(diffPrevBest))} abaixo do melhor título público.`;
+      if (adminAnual > 0.01) {
+        compText += ` A taxa de administração de ${fmtPct0(adminAnual)} ao ano pesa consideravelmente — compare com os 0,20% de custódia do Tesouro.`;
+      }
+      if (prazo < 10) {
+        compText += ` Para prazos menores que 10 anos, a alíquota regressiva da previdência ainda não chegou ao mínimo de 10%, reduzindo a vantagem tributária.`;
+      }
+    }
+    document.getElementById('comp-analysis').textContent = compText;
+
+    // ── Insight: taxa de administração ──
+    const taxaBreakEven = adminAnual; // simplificado
+    const feeInsight = document.getElementById('comp-insight-fee');
+    const feeText    = document.getElementById('comp-insight-fee-text');
+    if (adminAnual > 0.005) {
+      const selicComp = fmtPct0(selicRate - custodiaB3);
+      feeText.innerHTML = `<strong>Impacto da taxa de administração:</strong> A taxa de ${fmtPct0(adminAnual)} a.a. reduz a rentabilidade líquida da previdência para ${fmtPct0(taxaLiquidaAnual)} a.a. Para efeito de comparação, o Tesouro Selic cobra apenas 0,20% de custódia (${selicComp} líquido). Em ${prazo} anos, cada 0,5% a mais na taxa de administração pode representar dezenas de milhares de reais de diferença no saldo final.`;
+      feeInsight.style.display = 'flex';
+    } else {
+      feeInsight.style.display = 'none';
+    }
+
+    // ── Insight: PGBL ──
+    const pgblInsight = document.getElementById('comp-insight-pgbl');
+    const pgblText    = document.getElementById('comp-insight-pgbl-text');
+    if (tipo === 'pgbl' && economiaTotal > 0) {
+      pgblText.innerHTML = `<strong>Vantagem exclusiva do PGBL:</strong> A economia de IR anual de ${fmtBRL(economiaAnual)} (${fmtPct0(aliquotaMargInv)} sobre ${fmtBRL(pgblDedutivel)}) não existe no Tesouro Direto. Se esse valor economizado for reinvestido anualmente no próprio plano ou em outro ativo, o ganho real pode ser ainda maior do que o ${fmtBRL(economiaTotal)} estimado (que considera apenas o benefício nominal, sem reinvestimento).`;
+      pgblInsight.style.display = 'flex';
+    } else {
+      pgblInsight.style.display = 'none';
+    }
+
+    // ── Preenche painel principal ──
+    document.getElementById('r-total-investido').textContent = fmtBRL(totalInvestido);
+    document.getElementById('r-saldo-bruto').textContent     = fmtBRL(fv);
+    document.getElementById('r-rendimentos').textContent     = fmtBRL(rendimentos);
+    document.getElementById('r-retorno-bruto').textContent   = fmtPct((fv / totalEfetivo) - 1);
+    document.getElementById('r-aliquota').textContent        = aliquotaLabel;
+    document.getElementById('r-base-ir').textContent         = fmtBRL(baseIR) + (tipo === 'pgbl' ? ' (valor total)' : ' (somente rendimentos)');
+    document.getElementById('r-ir').textContent              = '− ' + fmtBRL(irValor);
+    document.getElementById('r-iof').textContent             = 'R$ 0,00 (prazo > 60 dias)';
+    document.getElementById('r-liquido').textContent         = fmtBRL(saldoLiquido);
+    document.getElementById('r-limite-pgbl').textContent     = tipo === 'pgbl' ? fmtBRL(limitePGBL) + '/ano' : 'N/A (VGBL)';
+    document.getElementById('r-economia-ir').textContent     = tipo === 'pgbl' ? fmtBRL(economiaAnual) + '/ano' : 'N/A (VGBL)';
+    document.getElementById('r-economia-total').textContent  = tipo === 'pgbl' ? fmtBRL(economiaTotal) : 'N/A (VGBL)';
+    document.getElementById('r-renda-bruta').textContent     = fmtBRL(rendaMensalBruta);
+    document.getElementById('r-renda-liquida').textContent   = fmtBRL(Math.max(0, rendaMensalLiquida));
+    document.getElementById('r-analysis').textContent        = analysis;
+
+    document.getElementById('result-box').classList.add('visible');
+    document.getElementById('empty-state').style.display = 'none';
+
+    if (window.innerWidth < 768) {
+      document.getElementById('result-box').scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+</script>
+
+</body>
+</html>
