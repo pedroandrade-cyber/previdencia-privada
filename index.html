@@ -1989,4 +1989,38 @@
     const pgblInsight = document.getElementById('comp-insight-pgbl');
     const pgblText    = document.getElementById('comp-insight-pgbl-text');
     if (tipo === 'pgbl' && economiaTotal > 0) {
-      pgblText.innerHTML = `<strong>Vantagem exclusiva do PGBL:</strong> A economia de IR anual de ${fmtBRL(economiaAnual)} (${fmtPct0(aliquotaMargInv)} sobre ${fmtBRL(pgblDedutivel)}) não existe no Tesouro Direto. Se esse valor economizado for reinvestido an
+      pgblText.innerHTML = `<strong>Vantagem exclusiva do PGBL:</strong> A economia de IR anual de ${fmtBRL(economiaAnual)} (${fmtPct0(aliquotaMargInv)} sobre ${fmtBRL(pgblDedutivel)}) não existe no Tesouro Direto. Se esse valor economizado for reinvestido anualmente, ao longo de ${prazo} anos você acumula ${fmtBRL(economiaTotal)} adicionais em restituições de IR — uma vantagem exclusiva do PGBL.`;
+      pgblInsight.style.display = 'flex';
+    } else {
+      pgblInsight.style.display = 'none';
+    }
+
+    // ── Exibe resultados ──
+    const baseIRDisplay = (tipo === 'pgbl') ? fv : rendimentos;
+    document.getElementById('r-total-investido').textContent = fmtBRL(totalInvestido);
+    document.getElementById('r-saldo-bruto').textContent     = fmtBRL(fv);
+    document.getElementById('r-rendimentos').textContent     = fmtBRL(rendimentos);
+    document.getElementById('r-retorno-bruto').textContent   = fmtPct((fv / totalEfetivo) - 1);
+    document.getElementById('r-aliquota').textContent        = aliquotaLabel;
+    document.getElementById('r-base-ir').textContent         = fmtBRL(baseIRDisplay) + (tipo === 'pgbl' ? ' (valor total)' : ' (somente rendimentos)');
+    document.getElementById('r-ir').textContent              = '− ' + fmtBRL(irValor);
+    document.getElementById('r-iof').textContent             = 'R$ 0,00 (prazo > 60 dias)';
+    document.getElementById('r-liquido').textContent         = fmtBRL(saldoLiquido);
+    document.getElementById('r-limite-pgbl').textContent     = tipo === 'pgbl' ? fmtBRL(limitePGBL) + '/ano' : 'N/A (VGBL)';
+    document.getElementById('r-economia-ir').textContent     = tipo === 'pgbl' ? fmtBRL(economiaAnual) + '/ano' : 'N/A (VGBL)';
+    document.getElementById('r-economia-total').textContent  = tipo === 'pgbl' ? fmtBRL(economiaTotal) : 'N/A (VGBL)';
+    document.getElementById('r-renda-bruta').textContent     = fmtBRL(rendaMensalBruta);
+    document.getElementById('r-renda-liquida').textContent   = fmtBRL(Math.max(0, rendaMensalLiquida));
+    document.getElementById('r-analysis').textContent        = analysis;
+
+    document.getElementById('result-box').classList.add('visible');
+    document.getElementById('empty-state').style.display    = 'none';
+
+    if (window.innerWidth < 768) {
+      document.getElementById('result-box').scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+  </script>
+
+  </body>
+</html>
